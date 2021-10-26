@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Gun
   - Plane
+  - Waypoints
+  - Enemy
   layers:
   - Default
   - TransparentFX

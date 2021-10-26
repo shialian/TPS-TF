@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    Rigidbody rb;
+    public float damage;
+
+    private Rigidbody rb;
 
     public void Initialize()
     {
@@ -20,5 +22,14 @@ public class Bullet : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.Damaged(damage);
+        }
     }
 }

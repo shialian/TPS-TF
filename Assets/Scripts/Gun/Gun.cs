@@ -10,11 +10,12 @@ public class Gun : MonoBehaviour
 
     private Vector3 forceDirection;
 
-    public void ShootBullet()
+    public void ShootBullet(Vector3 shootingPoint)
     {
         Bullet bullet = bulletCreator.CreateBullet();
+        Vector3 shootingDirection = (shootingPoint - muzzle.position).normalized;
+        transform.forward = shootingDirection;
         bullet.transform.position = muzzle.position;
-        forceDirection = transform.forward;
-        bullet.Shoot(force * forceDirection);
+        bullet.Shoot(force * shootingDirection);
     }
 }

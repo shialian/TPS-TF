@@ -55,6 +55,7 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
+        offset = new Vector3(0.0f, yOffset, 0.0f);
         SetLookAtDistance();
         SetPosition();
         transform.LookAt(player.position + offset);
