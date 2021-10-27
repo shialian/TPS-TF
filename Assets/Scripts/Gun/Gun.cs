@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public BulletCreator bulletCreator;
+    public BulletManager bulletManager;
     public Transform muzzle;
     public float force = 1000f;
 
@@ -12,7 +12,7 @@ public class Gun : MonoBehaviour
 
     public void ShootBullet(Vector3 shootingPoint)
     {
-        Bullet bullet = bulletCreator.CreateBullet();
+        Bullet bullet = bulletManager.CreateBullet();
         Vector3 shootingDirection = (shootingPoint - muzzle.position).normalized;
         transform.forward = shootingDirection;
         bullet.transform.position = muzzle.position;

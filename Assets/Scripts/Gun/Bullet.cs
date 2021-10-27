@@ -6,11 +6,13 @@ public class Bullet : MonoBehaviour
 {
     public float damage;
 
+    private BulletManager manager;
     private Rigidbody rb;
 
-    public void Initialize()
+    public void Initialize(BulletManager mgr)
     {
         rb = GetComponent<Rigidbody>();
+        manager = mgr;
     }
 
     public void Shoot(Vector3 force)
@@ -26,10 +28,17 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        switch(other.tag)
         {
-            Enemy enemy = other.GetComponent<Enemy>();
-            enemy.Damaged(damage);
+            case "Enemy":
+                Enemy enemy = other.GetComponent<Enemy>();
+                enemy.Damaged(damage);
+                break;
+            case "Player":
+                Player player = other.GetComponent<Player>();
+                player.Damaged(damage);
+                break;
         }
+        manager.ResetBullet(this);
     }
 }
