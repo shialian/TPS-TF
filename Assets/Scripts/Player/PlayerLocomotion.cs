@@ -11,16 +11,20 @@ public class PlayerLocomotion : MonoBehaviour
     public float movingSpeedFactor = 5.0f;  // 每秒最快5公尺，就是100公尺20秒的速度
     private Vector3 movingDirection;
     private float movingSpeed;
-    private float forwardSpeed;
-    private float rightSpeed;
+    public float forwardSpeed;
+    public float rightSpeed;
+    public bool collideWall = false;
 
     // Rotation
     public float rotateSpeedFactor = 10.0f;
 
     // Jumping
     public KeyCode jumpingKey = KeyCode.Space;
-    public float jumpingForce = 1.0f;
-    private bool isJumping = false;
+    public float jumpingForce = 300f;
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
+    private bool overJumping = false;
+    public bool isJumping = false;
 
     // Input
     public string vertical = "Vertical";
@@ -38,9 +42,14 @@ public class PlayerLocomotion : MonoBehaviour
     private void Update()
     {
         UpdateInput();
-        if (Input.GetKeyDown(jumpingKey))
+        UpdateJumpingVelocity();
+        if (Input.GetKey(jumpingKey))
         {
             Jumping();
+        }
+        else
+        {
+            isJumping = false;
         }
     }
 
@@ -50,13 +59,29 @@ public class PlayerLocomotion : MonoBehaviour
         rightSpeed = Input.GetAxis(horizontal);
     }
 
+    private void UpdateJumpingVelocity()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetKey(jumpingKey))
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+    }
+
     private void Jumping()
     {
-        if(isJumping == false)
+        if (rb.velocity.y < 7 && overJumping == false)
         {
-            rb.AddForce(Vector3.up * jumpingForce);
-            isJumping = true;
+            rb.velocity += jumpingForce * Vector3.up * Time.deltaTime;
         }
+        else if(rb.velocity.y >= 7)
+        {
+            overJumping = true;
+        }
+        isJumping = true;
     }
     
     private void FixedUpdate()
@@ -102,6 +127,10 @@ public class PlayerLocomotion : MonoBehaviour
     private void CalculateMovingSpeed()
     {
         movingSpeed = Mathf.Sqrt(Mathf.Pow(forwardSpeed, 2.0f) + Mathf.Pow(rightSpeed, 2.0f));  // 控制在0~1之間
+        if (collideWall)
+        {
+            movingSpeed = 0f;
+        }
     }
 
     private void SetPosition()
@@ -111,6 +140,38 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        isJumping = false;
+        Ray downRay = new Ray(transform.position, -transform.up);
+        RaycastHit hit;
+
+        if (Physics.Raycast(downRay, out hit, 100f))
+        {
+            if (Mathf.Abs(hit.distance - 1f) <= 0.1f)
+            {
+                overJumping = false;
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Ray downRay = new Ray(transform.position, -transform.up);
+        RaycastHit hit;
+
+        collideWall = false;
+        if (Physics.Raycast(downRay, out hit, 100f))
+        {
+            foreach (ContactPoint cp in collision.contacts)
+            {
+                if (cp.otherCollider.tag == "Plane" && cp.otherCollider.transform.position.y != hit.collider.transform.position.y)
+                {
+                    rb.velocity =  new Vector3(0f, rb.velocity.y, 0f);
+                    if (Vector3.Dot(cp.normal, movingDirection) < 0f)
+                    {
+                        collideWall = true;
+                    }
+                    break;
+                }
+            }
+        }
     }
 }
