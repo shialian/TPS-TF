@@ -64,6 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resource\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
+    <Compile Include="Assets\Resource\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
+    <Compile Include="Assets\Resource\AurynSky\Forest Pack\Scripts\Rotator.cs" />
+    <Compile Include="Assets\Resource\AurynSky\Forest Pack\Scripts\WheelController.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Enemy\DetectZone.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
@@ -77,6 +81,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerLocomotion.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerShoot.cs" />
     <None Include="Assets\Scripts\HeartGlowShader.shader" />
+    <None Include="Assets\Resource\AurynSky\Forest Pack\READ ME.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
