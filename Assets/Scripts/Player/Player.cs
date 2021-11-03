@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     public Gun holdingGun;
 
+    public Vector3 playerMiddleFromPosition;
+
     public float maxHP = 100f;
     public Slider HPBar;
 
@@ -44,5 +46,10 @@ public class Player : MonoBehaviour
         {
             HPBar.GetComponentInChildren<Image>().color = Color.red;
         }
+    }
+
+    public Vector3 GetRayCastingPosition()
+    {
+        return transform.position + playerMiddleFromPosition;
     }
 }

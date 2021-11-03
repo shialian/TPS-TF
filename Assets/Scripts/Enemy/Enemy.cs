@@ -12,22 +12,26 @@ public class Enemy : MonoBehaviour
     public bool playerDetect = false;
 
     private Waypoints wpoints;
-    private int waypointIndex = 0;
+    private int waypointIndex = 1;
     private Vector3 offset;
     private float currentHP;
-    private EnemyAttack attack;
+    private EnemyManager manager;
+    //private EnemyAttack attack;
 
-    private void Start()
+    public void Initialize(Waypoints road, EnemyManager mgr)
     {
-        wpoints = GameObject.FindGameObjectWithTag("Waypoints").GetComponent<Waypoints>();
+        wpoints = road;
         offset = new Vector3(0f, yOffset, 0f);
         currentHP = maxHP;
-        attack = GetComponent<EnemyAttack>();
+        HPBar.value = currentHP;
+        manager = mgr;
+        transform.position = wpoints.waypoints[0].transform.position;
+        //attack = GetComponent<EnemyAttack>();
     }
 
     private void FixedUpdate()
     {
-        //MovingTowardWaypoint();
+        MovingTowardWaypoint();
     }
 
     private void MovingTowardWaypoint()
@@ -47,7 +51,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            manager.ResetEnemy(this);
         }
     }
 
@@ -56,7 +60,7 @@ public class Enemy : MonoBehaviour
         currentHP -= damage;
         if(currentHP <= 0)
         {
-            Destroy(this.gameObject);
+            manager.ResetEnemy(this);
         }
         HPBar.value = currentHP / maxHP;
     }
@@ -64,6 +68,6 @@ public class Enemy : MonoBehaviour
     public void Fire(Transform player)
     {
         Vector3 attackDirection = (player.position - transform.position).normalized;
-        attack.Fire(attackDirection);
+        //attack.Fire(attackDirection);
     }
 }

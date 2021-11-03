@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    private Player player;
+
     // Camera
     private Transform mainCamera;
 
     // Running and Walking
-    public float movingSpeedFactor = 5.0f;  // 每秒最快5公尺，就是100公尺20秒的速度
     private Vector3 movingDirection;
-    private float movingSpeed;
-    public float forwardSpeed;
-    public float rightSpeed;
-    public bool collideWall = false;
+    public float movingSpeedFactor = 5.0f;
+    [HideInInspector]
+    public float movingSpeed;
+    private float forwardSpeed;
+    private float rightSpeed;
+    private bool collideWall = false;
 
     // Rotation
     public float rotateSpeedFactor = 10.0f;
@@ -24,7 +27,6 @@ public class PlayerLocomotion : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
     private bool overJumping = false;
-    public bool isJumping = false;
 
     // Input
     public string vertical = "Vertical";
@@ -37,6 +39,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
         rb = GetComponent<Rigidbody>();
+        player = GetComponent<Player>();
     }
 
     private void Update()
@@ -46,10 +49,6 @@ public class PlayerLocomotion : MonoBehaviour
         if (Input.GetKey(jumpingKey))
         {
             Jumping();
-        }
-        else
-        {
-            isJumping = false;
         }
     }
 
@@ -81,7 +80,6 @@ public class PlayerLocomotion : MonoBehaviour
         {
             overJumping = true;
         }
-        isJumping = true;
     }
     
     private void FixedUpdate()
@@ -121,11 +119,6 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void SetMovingSpeed()
     {
-        CalculateMovingSpeed();
-    }
-
-    private void CalculateMovingSpeed()
-    {
         movingSpeed = Mathf.Sqrt(Mathf.Pow(forwardSpeed, 2.0f) + Mathf.Pow(rightSpeed, 2.0f));  // 控制在0~1之間
         if (collideWall)
         {
@@ -140,12 +133,12 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Ray downRay = new Ray(transform.position, -transform.up);
+        Ray downRay = new Ray(player.GetRayCastingPosition(), -transform.up);
         RaycastHit hit;
 
-        if (Physics.Raycast(downRay, out hit, 100f))
+        if (Physics.Raycast(downRay, out hit, 100f, ~(1 << 8)))  // Player的layer是8，不要偵測
         {
-            if (Mathf.Abs(hit.distance - 1f) <= 0.1f)
+            if (Mathf.Abs(hit.distance - 1.1f) <= 0.1f)
             {
                 overJumping = false;
             }
@@ -154,17 +147,19 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        Ray downRay = new Ray(transform.position, -transform.up);
+        Ray downRay = new Ray(player.GetRayCastingPosition(), -transform.up);
         RaycastHit hit;
 
         collideWall = false;
-        if (Physics.Raycast(downRay, out hit, 100f))
+
+        if (Physics.Raycast(downRay, out hit, 100f, ~(1 << 8)))  // Player的layer是8，不要偵測
         {
             foreach (ContactPoint cp in collision.contacts)
             {
                 if (cp.otherCollider.tag == "Plane" && cp.otherCollider.transform.position.y != hit.collider.transform.position.y)
                 {
                     rb.velocity =  new Vector3(0f, rb.velocity.y, 0f);
+                    rb.angularVelocity = Vector3.zero;
                     if (Vector3.Dot(cp.normal, movingDirection) < 0f)
                     {
                         collideWall = true;
