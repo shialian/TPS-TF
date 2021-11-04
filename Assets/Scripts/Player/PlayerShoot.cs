@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public float colddown = 0.1f;
-    public float timer = 0f;
-    public Transform crosshair;
-
+    [SerializeField]
+    private float timer = 0f;
     private Player player;
     private Transform cam;
     private PlayerLocomotion locomoation;
@@ -25,7 +23,7 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetButton("FireOnlyMouse") && player.holdingGun != null)
         {
             locomoation.SetDirectionAndRotation();
-            if (timer >= colddown)
+            if (timer >= player.holdingGun.colddown)
             {
                 RaycastHit hit;
                 if(Physics.Raycast(cam.position, cam.forward, out hit, 1000f))
@@ -34,7 +32,7 @@ public class PlayerShoot : MonoBehaviour
                 }
                 else
                 {
-                    player.holdingGun.ShootBullet(cam.position + 10000f * cam.forward);
+                    player.holdingGun.ShootBullet(cam.position + player.holdingGun.force * cam.forward);
                 }
                 timer = 0f;
             }

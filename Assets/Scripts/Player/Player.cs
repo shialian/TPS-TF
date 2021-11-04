@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public Gun holdingGun;
+    public GunPack gunPack;
 
     public Vector3 playerMiddleFromPosition;
 
@@ -14,9 +15,12 @@ public class Player : MonoBehaviour
 
     private float currentHP;
 
+    private PlayerAnimation anim;
+
     private void Start()
     {
         currentHP = maxHP;
+        anim = GetComponent<PlayerAnimation>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,10 +35,23 @@ public class Player : MonoBehaviour
 
     private void GunAttached(Transform gun)
     {
-        gun.parent = this.transform;
-        gun.localPosition = new Vector3(0.0f, 0.0f, 0.5f);
-        gun.localRotation = Quaternion.identity;
-        holdingGun = gun.GetComponent<Gun>();
+        for(int i = 0; i < gunPack.guns.Length; i++)
+        {
+            Debug.Log(gunPack.guns[i].name + " " + gun.name);
+            if(gunPack.guns[i].name == gun.name)
+            {
+                holdingGun.gameObject.SetActive(false);
+                gunPack.guns[i].gameObject.SetActive(true);
+                holdingGun = gunPack.guns[i];
+                SetAttackType();
+                gun.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void SetAttackType()
+    {
+        anim.SetAttackType(holdingGun.gunType, holdingGun.attackType);
     }
 
     public void Damaged(float damage)

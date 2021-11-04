@@ -14,8 +14,10 @@ public class PlayerLocomotion : MonoBehaviour
     public float movingSpeedFactor = 5.0f;
     [HideInInspector]
     public float movingSpeed;
-    private float forwardSpeed;
-    private float rightSpeed;
+    [HideInInspector]
+    public float forwardSpeed;
+    [HideInInspector]
+    public float rightSpeed;
     private bool collideWall = false;
 
     // Rotation
@@ -26,6 +28,8 @@ public class PlayerLocomotion : MonoBehaviour
     public float jumpingForce = 300f;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+    [HideInInspector]
+    public bool isJumping = false;
     private bool overJumping = false;
 
     // Input
@@ -35,11 +39,15 @@ public class PlayerLocomotion : MonoBehaviour
     // Rigidbody
     private Rigidbody rb;
 
+    // Animator
+    private PlayerAnimation anim;
+
     private void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
         rb = GetComponent<Rigidbody>();
         player = GetComponent<Player>();
+        anim = GetComponent<PlayerAnimation>();
     }
 
     private void Update()
@@ -80,8 +88,9 @@ public class PlayerLocomotion : MonoBehaviour
         {
             overJumping = true;
         }
+        isJumping = true;
     }
-    
+
     private void FixedUpdate()
     {
         UpdatePosition();
@@ -102,9 +111,10 @@ public class PlayerLocomotion : MonoBehaviour
             float cameraYaw = mainCamera.eulerAngles.y;
             Vector3 playerRotation = new Vector3(0.0f, playerYaw + cameraYaw, 0.0f);
             Quaternion quaPlayerRotation = Quaternion.Euler(playerRotation);
+            Quaternion cameraRotation = Quaternion.Euler(new Vector3(0f, cameraYaw, 0f));
             movingDirection = quaPlayerRotation * Vector3.forward;
             movingDirection = RoundVector(movingDirection, -3);
-            transform.rotation =  Quaternion.Lerp(transform.rotation, quaPlayerRotation, rotateSpeedFactor * Time.fixedDeltaTime);
+            transform.rotation =  Quaternion.Lerp(transform.rotation, cameraRotation, rotateSpeedFactor * Time.fixedDeltaTime);
         }
     }
 
@@ -138,11 +148,17 @@ public class PlayerLocomotion : MonoBehaviour
 
         if (Physics.Raycast(downRay, out hit, 100f, ~(1 << 8)))  // Player的layer是8，不要偵測
         {
-            if (Mathf.Abs(hit.distance - 1.1f) <= 0.1f)
+            if (hit.distance <= 0.1f)
             {
+                if (isJumping)
+                {
+                    anim.Falling();
+                }
                 overJumping = false;
+                isJumping = false;
             }
         }
+        rb.angularVelocity = Vector3.zero;
     }
 
     private void OnCollisionStay(Collision collision)
