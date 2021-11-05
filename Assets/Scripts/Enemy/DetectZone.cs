@@ -7,7 +7,12 @@ public class DetectZone : MonoBehaviour
     public float colddown = 0.1f;
 
     private Enemy self;
-    private float timer = 0;
+    private float timer;
+
+    private void Awake()
+    {
+        timer = colddown;
+    }
 
     private void Start()
     {

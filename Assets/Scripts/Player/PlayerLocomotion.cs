@@ -80,15 +80,21 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Jumping()
     {
-        if (rb.velocity.y < 7 && overJumping == false)
+        if (isJumping == false && anim.anim.GetBool("IsFalling") == false)
         {
-            rb.velocity += jumpingForce * Vector3.up * Time.deltaTime;
+            isJumping = true;
         }
-        else if(rb.velocity.y >= 7)
+        if (isJumping)
         {
-            overJumping = true;
+            if (rb.velocity.y < 7 && overJumping == false)
+            {
+                rb.velocity += jumpingForce * Vector3.up * Time.deltaTime;
+            }
+            else if (rb.velocity.y >= 7)
+            {
+                overJumping = true;
+            }
         }
-        isJumping = true;
     }
 
     private void FixedUpdate()

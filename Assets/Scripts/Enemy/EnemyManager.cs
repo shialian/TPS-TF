@@ -23,16 +23,23 @@ public class EnemyManager : MonoBehaviour
         timer += Time.fixedDeltaTime;
         if(timer >= colddown && number > 0)
         {
-            CreateEnemy();
+            CreateEnemy("Water");
             number--;
             timer = 0;
         }
     }
 
-    public Enemy CreateEnemy()
+    public Enemy CreateEnemy(string roadName)
     {
         Enemy enemy = enemyPool.Rent();
-        enemy.Initialize(generalRoad, this);
+        if (roadName == "General")
+        {
+            enemy.Initialize(generalRoad, this);
+        }
+        else if(roadName == "Water")
+        {
+            enemy.Initialize(waterRoad, this);
+        }
         enemy.transform.SetParent(transform);
 
         return enemy;

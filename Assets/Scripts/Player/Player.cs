@@ -12,15 +12,44 @@ public class Player : MonoBehaviour
 
     public float maxHP = 100f;
     public Slider HPBar;
-
+    public float recoverHP = 3f;
     private float currentHP;
 
+    public float colddown = 1f;
+    private float timer = 0f;
+
     private PlayerAnimation anim;
+    public enum State
+    {
+        Normal,
+        Attacking
+    };
+    [HideInInspector]
+    public State state;
+
+    private void Awake()
+    {
+        state = State.Normal;
+    }
 
     private void Start()
     {
         currentHP = maxHP;
         anim = GetComponent<PlayerAnimation>();
+    }
+
+    private void Update()
+    {
+        anim.SetState();
+
+        timer += Time.deltaTime;
+        if(timer >= colddown)
+        {
+            currentHP += recoverHP;
+            currentHP = Mathf.Min(currentHP, maxHP);
+            HPBar.value = currentHP / maxHP;
+            timer = 0f;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

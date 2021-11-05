@@ -5,10 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector]
-    public GameManager singleton;
+    public static GameManager singleton;
     public float colddown = 2f;
     public GunManager gunManager;
     public Transform[] availableBlocks;
+
+    public bool poisonous = false;
+    public Material virus;
 
     private float timer = 200f;
 

@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {
-    public Bullet bulletPrefab;
+    public Bullet[] bulletPrefab;
     private BulletPool bulletPool = null;
 
     private void Start()
     {
-        bulletPool = new BulletPool(bulletPrefab);
+        bulletPool = new BulletPool(bulletPrefab[0]);
     }
 
-    public Bullet CreateBullet()
+    public Bullet CreateBullet(int index=0)
     {
-        Bullet bullet = bulletPool.Rent();
+        Bullet bullet;
+        bullet = bulletPool.Rent(bulletPrefab[index]);
         bullet.Initialize(this);
         bullet.transform.SetParent(transform);
-        StartCoroutine(ResetBullet(bullet, 2.0f));
+        StartCoroutine(ResetBullet(bullet, 30.0f));
 
         return bullet;
     }

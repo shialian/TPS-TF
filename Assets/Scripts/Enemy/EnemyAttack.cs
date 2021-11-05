@@ -14,9 +14,9 @@ public class EnemyAttack : MonoBehaviour
         bulletManager = GameObject.Find("Enemy Bullet Pool").GetComponent<BulletManager>();
     }
 
-    public void Fire(Vector3 attackDirection)
+    public void Fire(Vector3 attackDirection, int bulletIndex)
     {
-        Bullet bullet = bulletManager.CreateBullet();
+        Bullet bullet = bulletManager.CreateBullet(bulletIndex);
         bullet.transform.position = transform.position;
         bullet.Shoot(force * attackDirection);
     }

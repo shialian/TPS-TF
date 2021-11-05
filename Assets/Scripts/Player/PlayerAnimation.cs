@@ -7,9 +7,14 @@ public class PlayerAnimation : MonoBehaviour
     public RuntimeAnimatorController pistolAnimator;
     public RuntimeAnimatorController assultAnimator;
 
-    private Animator anim;
+    [HideInInspector]
+    public Animator anim;
     private Player player;
     private PlayerLocomotion locomotion;
+
+    private string idleAttackState = "Idle Attacking";
+    private string runningAttackState = "Attack Running";
+    private string jumpAttackState = "Jump Attacking";
 
     private void Start()
     {
@@ -50,10 +55,24 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void SetState()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName(idleAttackState) ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName(runningAttackState) ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName(jumpAttackState))
+        {
+            player.state = Player.State.Attacking;
+        }
+        else
+        {
+            player.state = Player.State.Normal;
+        }
+    }
+
     public void Falling()
     {
         anim.SetBool("IsFalling", true);
-        Invoke("FallingEnd", 0.3f);
+        Invoke("FallingEnd", 0.1f);
     }
 
     private void FallingEnd()

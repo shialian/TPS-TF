@@ -9,14 +9,27 @@ public class Enemy : MonoBehaviour
     public float yOffset;
     public float maxHP = 100f;
     public Slider HPBar;
+    public Transform hitVFX;
     public bool playerDetect = false;
+    public Material water = null;
 
     private Waypoints wpoints;
     private int waypointIndex = 1;
     private Vector3 offset;
     private float currentHP;
     private EnemyManager manager;
-    //private EnemyAttack attack;
+    private EnemyAttack attack;
+    private int bulletIndex;
+
+    public enum Type
+    {
+        Normal,
+        Powered_Normal,
+        Fire,
+        Thunder,
+        Virus
+    };
+    public Type type;
 
     public void Initialize(Waypoints road, EnemyManager mgr)
     {
@@ -26,7 +39,26 @@ public class Enemy : MonoBehaviour
         HPBar.value = currentHP;
         manager = mgr;
         transform.position = wpoints.waypoints[0].transform.position;
-        //attack = GetComponent<EnemyAttack>();
+        switch (type) {
+            case Type.Fire:
+                attack = GetComponent<EnemyAttack>();
+                GameManager.singleton.poisonous = false;
+                bulletIndex = 0;
+                break;
+            case Type.Thunder:
+                attack = GetComponent<EnemyAttack>();
+                GameManager.singleton.poisonous = false;
+                bulletIndex = 1;
+                break;
+            case Type.Virus:
+                attack = GetComponent<EnemyAttack>();
+                GameManager.singleton.poisonous = true;
+                bulletIndex = 2;
+                break;
+            default:
+                GameManager.singleton.poisonous = false;
+                break;
+        }
     }
 
     private void FixedUpdate()
@@ -58,8 +90,9 @@ public class Enemy : MonoBehaviour
     public void Damaged(float damage)
     {
         currentHP -= damage;
-        if(currentHP <= 0)
+        if (currentHP <= 0)
         {
+            Instantiate(hitVFX, transform.position, transform.rotation);
             manager.ResetEnemy(this);
         }
         HPBar.value = currentHP / maxHP;
@@ -68,6 +101,7 @@ public class Enemy : MonoBehaviour
     public void Fire(Transform player)
     {
         Vector3 attackDirection = (player.position - transform.position).normalized;
-        //attack.Fire(attackDirection);
+        attackDirection.y = 0f;
+        attack.Fire(attackDirection, bulletIndex);
     }
 }

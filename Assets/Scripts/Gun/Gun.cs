@@ -36,7 +36,7 @@ public class Gun : MonoBehaviour
         {
             switch (attackType) {
                 case AttackType.Auto:
-                    colddown = 0.1066f;
+                    colddown = 0.1f;
                     break;
                 case AttackType.Single:
                     colddown = 0.5f;
