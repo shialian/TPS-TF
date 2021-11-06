@@ -26,9 +26,16 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Update()
     {
-        SetRunning();
-        SetJump();
-        SetAttack();
+        if (locomotion.movingSpeedFactor > 0f)
+        {
+            SetRunning();
+            SetJump();
+            SetAttack();
+        }
+        else
+        {
+            anim.SetFloat("Speed", 0f);
+        }
     }
 
     private void SetRunning()
@@ -45,7 +52,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void SetAttack()
     {
-        if (Input.GetButton("FireOnlyMouse"))
+        if (Input.GetButton("FireOnlyMouse") && player.holdingGun != null)
         {
             anim.SetBool("IsAttack", true);
         }

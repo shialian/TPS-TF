@@ -20,7 +20,7 @@ public class PlayerShoot : MonoBehaviour
     private void FixedUpdate()
     {
         timer += Time.fixedDeltaTime;
-        if (Input.GetButton("FireOnlyMouse") && player.holdingGun != null)
+        if (Input.GetButton("FireOnlyMouse") && player.holdingGun != null && locomoation.movingSpeedFactor > 0f)
         {
             locomoation.SetDirectionAndRotation();
             if (timer >= player.holdingGun.colddown)
@@ -29,6 +29,19 @@ public class PlayerShoot : MonoBehaviour
                 if(Physics.Raycast(cam.position, cam.forward, out hit, 1000f))
                 {
                     player.holdingGun.ShootBullet(hit.point);
+                    if (player.holdingGun.currentBulletAmount > 0)
+                    {
+                        player.bulletAmountText.text = player.holdingGun.currentBulletAmount.ToString();
+                    }
+                    else
+                    {
+                        player.bulletAmountText.text = "";
+                    }
+                    if(player.holdingGun.currentBulletAmount == 0)
+                    {
+                        player.holdingGun.gameObject.SetActive(false);
+                        player.SetGunIcon(-1);
+                    }
                 }
                 else
                 {

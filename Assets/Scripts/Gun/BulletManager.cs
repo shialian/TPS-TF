@@ -4,43 +4,11 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {
-    public Bullet[] bulletPrefab;
-    private BulletPool bulletPool = null;
+    public BulletCreator[] bulletCreators;
 
-    private void Start()
+    public Bullet CreateBullet(int index)
     {
-        bulletPool = new BulletPool(bulletPrefab[0]);
-    }
-
-    public Bullet CreateBullet(int index=0)
-    {
-        Bullet bullet;
-        bullet = bulletPool.Rent(bulletPrefab[index]);
-        bullet.Initialize(this);
-        bullet.transform.SetParent(transform);
-        StartCoroutine(ResetBullet(bullet, 30.0f));
-
+        Bullet bullet = bulletCreators[index].CreateBullet();
         return bullet;
-    }
-
-    IEnumerator ResetBullet(Bullet bullet, float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
-        bulletPool.Return(bullet);
-    }
-
-    public void ResetBullet(Bullet bullet)
-    {
-        bulletPool.Return(bullet);
-    }
-}
-
-public class BulletPool : PrefabPool<Bullet>
-{
-    public BulletPool(Bullet bullet) : base(bullet) { }
-    protected override void OnBeforeReturn(Bullet instance)
-    {
-        base.OnBeforeReturn(instance);
-        instance.ResetToInitial();
     }
 }

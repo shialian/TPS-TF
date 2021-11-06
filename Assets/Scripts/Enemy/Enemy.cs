@@ -11,13 +11,13 @@ public class Enemy : MonoBehaviour
     public Slider HPBar;
     public Transform hitVFX;
     public bool playerDetect = false;
-    public Material water = null;
+    public float damageToCastle = 10f;
 
     private Waypoints wpoints;
     private int waypointIndex = 1;
     private Vector3 offset;
     private float currentHP;
-    private EnemyManager manager;
+    private EnemyCreator creator;
     private EnemyAttack attack;
     private int bulletIndex;
 
@@ -31,32 +31,28 @@ public class Enemy : MonoBehaviour
     };
     public Type type;
 
-    public void Initialize(Waypoints road, EnemyManager mgr)
+    public void Initialize(Waypoints road, EnemyCreator ctr)
     {
         wpoints = road;
         offset = new Vector3(0f, yOffset, 0f);
         currentHP = maxHP;
         HPBar.value = currentHP;
-        manager = mgr;
+        creator = ctr;
         transform.position = wpoints.waypoints[0].transform.position;
         switch (type) {
             case Type.Fire:
                 attack = GetComponent<EnemyAttack>();
-                GameManager.singleton.poisonous = false;
                 bulletIndex = 0;
                 break;
             case Type.Thunder:
                 attack = GetComponent<EnemyAttack>();
-                GameManager.singleton.poisonous = false;
                 bulletIndex = 1;
                 break;
             case Type.Virus:
                 attack = GetComponent<EnemyAttack>();
-                GameManager.singleton.poisonous = true;
                 bulletIndex = 2;
                 break;
             default:
-                GameManager.singleton.poisonous = false;
                 break;
         }
     }
@@ -83,7 +79,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            manager.ResetEnemy(this);
+            creator.ResetEnemy(this);
         }
     }
 
@@ -93,15 +89,14 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0)
         {
             Instantiate(hitVFX, transform.position, transform.rotation);
-            manager.ResetEnemy(this);
+            creator.ResetEnemy(this);
         }
         HPBar.value = currentHP / maxHP;
     }
 
     public void Fire(Transform player)
     {
-        Vector3 attackDirection = (player.position - transform.position).normalized;
-        attackDirection.y = 0f;
+        Vector3 attackDirection = (player.position - transform.position + new Vector3(0f, 1f, 0f)).normalized;
         attack.Fire(attackDirection, bulletIndex);
     }
 }

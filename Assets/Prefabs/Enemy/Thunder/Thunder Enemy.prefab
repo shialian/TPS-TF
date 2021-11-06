@@ -10005,8 +10005,9 @@ MonoBehaviour:
   yOffset: 1.1
   maxHP: 10
   HPBar: {fileID: 5734565255803024312}
-  hitVFX: {fileID: 400004, guid: 7856369e017858245a0c19676eb57a94, type: 3}
+  hitVFX: {fileID: 400004, guid: e4f631cc71486814bbdf8a626bfa3556, type: 3}
   playerDetect: 0
+  damageToCastle: 10
   type: 3
 --- !u!114 &5734565257002567564
 MonoBehaviour:

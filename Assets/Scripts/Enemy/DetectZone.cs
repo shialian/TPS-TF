@@ -21,7 +21,7 @@ public class DetectZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        timer = 0;
+        timer = colddown - Time.fixedDeltaTime * 5f;
     }
 
     private void OnTriggerStay(Collider other)

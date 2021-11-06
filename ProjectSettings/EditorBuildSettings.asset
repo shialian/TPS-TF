@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Velley.unity
+    guid: d90e57a8eb224ab40a1802c721e45bec
   m_configObjects: {}

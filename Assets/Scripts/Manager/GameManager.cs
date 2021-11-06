@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GunManager gunManager;
     public Transform[] availableBlocks;
 
+    public Fighter fighter;
+
     public bool poisonous = false;
     public Material virus;
 
@@ -26,10 +28,24 @@ public class GameManager : MonoBehaviour
         timer += Time.fixedDeltaTime;
         if(timer >= colddown)
         {
-            Transform selectblock = availableBlocks[Random.Range(0, availableBlocks.Length)];
-            Vector3 instantPosition = selectblock.position + new Vector3(0f, 2f, 0f);
-            gunManager.CreateGun(instantPosition);
+            SetFighterSupport();
             timer = 0f;
         }
+    }
+
+    private void SetFighterSupport()
+    {
+        int supportCount = Random.Range(3, 6);
+        Waypoints waypoints = fighter.GetComponent<Waypoints>();
+        waypoints.waypoints = new Transform[supportCount + 1];
+        waypoints.waypoints[0] = fighter.transform;
+        for(int i = 1; i <= supportCount; i++)
+        {
+            Transform selectblock = availableBlocks[Random.Range(0, availableBlocks.Length)];
+            waypoints.waypoints[i] = selectblock;
+        }
+        
+        Fighter f = Instantiate(fighter);
+        f.Initialize(gunManager, waypoints);
     }
 }

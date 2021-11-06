@@ -68,6 +68,25 @@
     <Compile Include="Assets\Resource\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
     <Compile Include="Assets\Resource\AurynSky\Forest Pack\Scripts\Rotator.cs" />
     <Compile Include="Assets\Resource\AurynSky\Forest Pack\Scripts\WheelController.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\BlitUtility.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\BlurType.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\CameraUtility.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\CustomTargetBlitter.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\DOTween support\DOTweenEPO.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\KeywordsUtility.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\OnPreRenderEventTransferer.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\Outlinable.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\OutlineEffect.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\OutlineParameters.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\OutlineTarget.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\Outliner.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\PipelineAssetUtility.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\RenderTargetUtility.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\RendererFilteringUtility.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\SerializedPass.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\TargetsHolder.cs" />
+    <Compile Include="Assets\Resource\Easy performant outline\Scripts\URPOutlineFeature.cs" />
+    <Compile Include="Assets\Resource\Fantasy UI\Samples\IconPreview.cs" />
     <Compile Include="Assets\Resource\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Resource\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\Resource\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
@@ -116,10 +135,12 @@
     <Compile Include="Assets\Scripts\Enemy\DetectZone.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyCreator.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\PoweredEnemyEffect.cs" />
     <Compile Include="Assets\Scripts\Enemy\Waypoints.cs" />
     <Compile Include="Assets\Scripts\Gun\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Gun\BulletCreator.cs" />
     <Compile Include="Assets\Scripts\Gun\BulletManager.cs" />
     <Compile Include="Assets\Scripts\Gun\Gun.cs" />
     <Compile Include="Assets\Scripts\Gun\GunManager.cs" />
@@ -131,18 +152,32 @@
     <Compile Include="Assets\Scripts\Player\PlayerAnimation.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerLocomotion.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerShoot.cs" />
+    <Compile Include="Assets\Scripts\Scene\Castle.cs" />
+    <Compile Include="Assets\Scripts\Scene\Fighter.cs" />
     <Compile Include="Assets\Scripts\Scene\River.cs" />
+    <Compile Include="Assets\Scripts\Test\TestCollision.cs" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\FinalBlit.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\ZPrepass.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Resource\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Fills\ColorFill.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\TransparentBlit.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Dilate.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Resource\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
     <None Include="Assets\Resource\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Fills\EmptyFill.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Resource\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\BasicBlit.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\PartialBlit.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Fills\Fresnel.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Outline.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Fills\Dots.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -150,9 +185,16 @@
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Fills\FillMask.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\MiskCG.cginc" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\EdgeDilate.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\ClearStencil.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Blur.shader" />
     <None Include="Assets\Scripts\HeartGlowShader.shader" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\OutlineMask.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\Fills\Interlaced.shader" />
     <None Include="Assets\Resource\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
@@ -696,6 +738,21 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -711,38 +768,23 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder">
-      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.Editor">
-      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProBuilder.AddOns.Editor">
       <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>D:/在交大的東東/數位遊戲與學習/HW5/TPS+TF/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>

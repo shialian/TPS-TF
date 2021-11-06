@@ -8,6 +8,7 @@ TagManager:
   - Plane
   - Waypoints
   - Enemy
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - PlayerAttack
   - EnemyAttack
   - Gun
-  - 
+  - 3DUI
   - 
   - 
   - 

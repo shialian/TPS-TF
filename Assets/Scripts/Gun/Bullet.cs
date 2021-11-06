@@ -6,13 +6,22 @@ public class Bullet : MonoBehaviour
 {
     public float damage;
 
-    private BulletManager manager;
+    public enum Attribute
+    {
+        General,
+        Fire,
+        Thunder,
+        Poison
+    };
+    public Attribute attribute;
+
+    private BulletCreator creator;
     private Rigidbody rb;
 
-    public void Initialize(BulletManager mgr)
+    public void Initialize(BulletCreator ctr)
     {
         rb = GetComponent<Rigidbody>();
-        manager = mgr;
+        creator = ctr;
     }
 
     public void Shoot(Vector3 force)
@@ -37,8 +46,9 @@ public class Bullet : MonoBehaviour
             case "Player":
                 Player player = other.GetComponent<Player>();
                 player.Damaged(damage);
+                player.SetState(attribute);
                 break;
         }
-        manager.ResetBullet(this);
+        creator.ResetBullet(this);
     }
 }

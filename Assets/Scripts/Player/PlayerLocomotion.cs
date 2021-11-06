@@ -54,7 +54,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         UpdateInput();
         UpdateJumpingVelocity();
-        if (Input.GetKey(jumpingKey))
+        if (Input.GetKey(jumpingKey) && movingSpeedFactor > 0f)
         {
             Jumping();
         }
@@ -86,11 +86,11 @@ public class PlayerLocomotion : MonoBehaviour
         }
         if (isJumping)
         {
-            if (rb.velocity.y < 7 && overJumping == false)
+            if (rb.velocity.y < 6 && overJumping == false)
             {
                 rb.velocity += jumpingForce * Vector3.up * Time.deltaTime;
             }
-            else if (rb.velocity.y >= 7)
+            else if (rb.velocity.y >= 6)
             {
                 overJumping = true;
             }
