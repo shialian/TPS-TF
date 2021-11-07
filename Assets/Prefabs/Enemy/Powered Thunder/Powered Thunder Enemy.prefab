@@ -9905,8 +9905,9 @@ GameObject:
   - component: {fileID: 5734565257002567560}
   - component: {fileID: 5734565257002567563}
   - component: {fileID: 5734565257002567564}
+  - component: {fileID: 7427131647616786624}
   m_Layer: 9
-  m_Name: Thunder Enemy
+  m_Name: Powered Thunder Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10002,13 +10003,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111c97c31751e644caf48810af1afe4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeed: 2.5
+  movingSpeed: 1.5
   yOffset: 1.1
-  maxHP: 10
+  maxHP: 40
   HPBar: {fileID: 5734565255803024312}
   hitVFX: {fileID: 400004, guid: e4f631cc71486814bbdf8a626bfa3556, type: 3}
   playerDetect: 0
   damageToCastle: 10
+  waypointIndex: 1
   type: 3
 --- !u!114 &5734565257002567564
 MonoBehaviour:
@@ -10024,6 +10026,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 500
   bulletManager: {fileID: 0}
+--- !u!114 &7427131647616786624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734565257002567562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97297d487de3e16479ff3e7c531e389c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5734565257279134211
 GameObject:
   m_ObjectHideFlags: 0
@@ -10153,6 +10167,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3728285476104844851, guid: 0053c812294a6954ab60d51740e459ef,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3728285476104844851, guid: 0053c812294a6954ab60d51740e459ef,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3728285476104844852, guid: 0053c812294a6954ab60d51740e459ef,
         type: 3}

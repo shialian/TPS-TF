@@ -368,8 +368,9 @@ GameObject:
   - component: {fileID: 4281959523441428410}
   - component: {fileID: 4281959523441428409}
   - component: {fileID: 4281959523441428414}
+  - component: {fileID: 4206133771767908713}
   m_Layer: 9
-  m_Name: Virus Enemy
+  m_Name: Powered Virus Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,13 +466,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111c97c31751e644caf48810af1afe4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeed: 5
+  movingSpeed: 2.5
   yOffset: 1.1
-  maxHP: 10
+  maxHP: 40
   HPBar: {fileID: 4281959522493477770}
   hitVFX: {fileID: 400004, guid: 0c45ad7352c0e8c46bb2481c059af09c, type: 3}
   playerDetect: 0
   damageToCastle: 10
+  waypointIndex: 1
   type: 4
 --- !u!114 &4281959523441428414
 MonoBehaviour:
@@ -487,6 +489,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 500
   bulletManager: {fileID: 0}
+--- !u!114 &4206133771767908713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4281959523441428408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97297d487de3e16479ff3e7c531e389c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6657292163377914110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -558,6 +572,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3728285476104844851, guid: 0053c812294a6954ab60d51740e459ef,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3728285476104844851, guid: 0053c812294a6954ab60d51740e459ef,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3728285476104844852, guid: 0053c812294a6954ab60d51740e459ef,
         type: 3}

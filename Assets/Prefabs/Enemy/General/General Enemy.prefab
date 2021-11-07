@@ -235,8 +235,9 @@ GameObject:
   - component: {fileID: 9222814427422901599}
   - component: {fileID: 9222814427422901598}
   - component: {fileID: 9222814427422900898}
+  - component: {fileID: 9096623743211318053}
   m_Layer: 9
-  m_Name: Normal Enemy
+  m_Name: General Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,7 +335,22 @@ MonoBehaviour:
   maxHP: 10
   HPBar: {fileID: 9222814426015450143}
   hitVFX: {fileID: 400004, guid: 47c73014c95ac5140b27f0259ad1f765, type: 3}
+  playerDetect: 0
+  damageToCastle: 10
+  waypointIndex: 1
   type: 0
+--- !u!114 &9096623743211318053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9222814427422901597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97297d487de3e16479ff3e7c531e389c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9222814427522713582
 GameObject:
   m_ObjectHideFlags: 0

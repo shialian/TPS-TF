@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fighter : MonoBehaviour
 {
     public float movingSpeed;
+    public Transform bomb;
 
     private GunManager gunManager;
     private Waypoints waypoints;
@@ -61,5 +62,27 @@ public class Fighter : MonoBehaviour
     private void DeliverGun()
     {
         gunManager.CreateGun(transform.position);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && GameManager.singleton.bomb)
+        {
+            DeliverBomb();
+            GameManager.singleton.bombIcon.SetActive(false);
+            GameManager.singleton.bomb = false;
+        }
+    }
+
+    private void DeliverBomb()
+    {
+        EnemyManager enemyManager = GameObject.Find("Enemy Pool").GetComponent<EnemyManager>();
+        Transform firstActiveEnemy = enemyManager.GetFirstActiveEnemyPosition();
+        if(firstActiveEnemy != null)
+        {
+            Vector3 deliverDirection = (firstActiveEnemy.position - transform.position).normalized;
+            Transform bombInstant = Instantiate(bomb.transform, transform.position, transform.rotation);
+            bombInstant.GetComponent<Bomb>().firstActiveEnemy = firstActiveEnemy;
+        }
     }
 }

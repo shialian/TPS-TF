@@ -12,8 +12,10 @@ public class Enemy : MonoBehaviour
     public Transform hitVFX;
     public bool playerDetect = false;
     public float damageToCastle = 10f;
+    public Transform bombVFX;
 
     private Waypoints wpoints;
+    [SerializeField]
     private int waypointIndex = 1;
     private Vector3 offset;
     private float currentHP;
@@ -27,18 +29,20 @@ public class Enemy : MonoBehaviour
         Powered_Normal,
         Fire,
         Thunder,
-        Virus
+        Virus,
+        Bomb
     };
     public Type type;
 
     public void Initialize(Waypoints road, EnemyCreator ctr)
     {
         wpoints = road;
+        waypointIndex = 1;
         offset = new Vector3(0f, yOffset, 0f);
         currentHP = maxHP;
         HPBar.value = currentHP;
         creator = ctr;
-        transform.position = wpoints.waypoints[0].transform.position;
+        transform.position = wpoints.waypoints[0].transform.position + offset;
         switch (type) {
             case Type.Fire:
                 attack = GetComponent<EnemyAttack>();
@@ -89,6 +93,12 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0)
         {
             Instantiate(hitVFX, transform.position, transform.rotation);
+            if(type == Type.Bomb)
+            {
+                EnemyManager enemyManager = GameObject.Find("Enemy Pool").GetComponent<EnemyManager>();
+                Instantiate(bombVFX, transform.position, transform.rotation);
+                enemyManager.GetBomb(transform.position, 12f);
+            }
             creator.ResetEnemy(this);
         }
         HPBar.value = currentHP / maxHP;

@@ -1,21 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [HideInInspector]
     public static GameManager singleton;
-    public float colddown = 2f;
+
+    public RoundManager roundManager;
+    public EnemyManager enemyManager;
+    public Text roundsText;
+    public GameObject remindText;
+
     public GunManager gunManager;
     public Transform[] availableBlocks;
 
     public Fighter fighter;
+    public bool bomb = true;
+    public GameObject bombIcon;
 
     public bool poisonous = false;
     public Material virus;
 
-    private float timer = 200f;
+    public float colddown = 2f;
+    private float timer = 20f;
 
     private void Start()
     {
@@ -25,11 +34,14 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        timer += Time.fixedDeltaTime;
-        if(timer >= colddown)
+        if (enemyManager.allEnemyDead == false)
         {
-            SetFighterSupport();
-            timer = 0f;
+            timer += Time.fixedDeltaTime;
+            if (timer >= colddown)
+            {
+                SetFighterSupport();
+                timer = 0f;
+            }
         }
     }
 
@@ -47,5 +59,23 @@ public class GameManager : MonoBehaviour
         
         Fighter f = Instantiate(fighter);
         f.Initialize(gunManager, waypoints);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return) && enemyManager.allEnemyDead)
+        {
+            roundManager.NewRoundStart();
+            roundsText.text = roundManager.roundIndex.ToString();
+            remindText.SetActive(false);
+            bomb = true;
+            bombIcon.SetActive(true);
+            timer = colddown;
+        }
+    }
+
+    public void SetRemindTextOn()
+    {
+        remindText.SetActive(true);
     }
 }

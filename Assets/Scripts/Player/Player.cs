@@ -192,7 +192,6 @@ public class Player : MonoBehaviour
         {
             if(gunPack.guns[i].name == gun.name)
             {
-                Debug.Log(i + " " + gunPack.guns[i].name + " " + gun.name);
                 if (holdingGun != null)
                 {
                     holdingGun.gameObject.SetActive(false);
@@ -261,9 +260,9 @@ public class Player : MonoBehaviour
                     onFireIndex = stateIndex;
                     stateIndex++;
                 }
-                fireCountdown += 10f;
+                fireCountdown += 5f;
                 poiCountdown = Mathf.Round(poiCountdown);
-                fireCountdown = Mathf.Min(fireCountdown, 20f);
+                fireCountdown = Mathf.Min(fireCountdown, 15f);
                 break;
             case Bullet.Attribute.Thunder:
                 if (onEle == false)
@@ -289,9 +288,9 @@ public class Player : MonoBehaviour
                     onPoiIndex = stateIndex;
                     stateIndex++;
                 }
-                poiCountdown += 10f;
+                poiCountdown += 5f;
                 poiCountdown = Mathf.Round(poiCountdown);
-                poiCountdown = Mathf.Min(poiCountdown, 20f);
+                poiCountdown = Mathf.Min(poiCountdown, 15f);
                 break;
         }
     }
