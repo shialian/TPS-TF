@@ -344,13 +344,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111c97c31751e644caf48810af1afe4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeed: 5
+  movingSpeed: 2.5
   yOffset: 1.1
   maxHP: 50
   HPBar: {fileID: 9222814426015450143}
   hitVFX: {fileID: 400004, guid: 9cd45f4dada0a574a858186e7b3f0260, type: 3}
   playerDetect: 0
-  damageToCastle: 10
+  damageToCastle: 50
   bombVFX: {fileID: 4977646799359860, guid: ab23228ada991ce489efd4ba9bff0ad1, type: 3}
   waypointIndex: 1
   type: 5

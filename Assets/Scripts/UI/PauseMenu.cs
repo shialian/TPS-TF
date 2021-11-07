@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    public GameObject intro;
+
     public void Continue()
     {
         Time.timeScale = 1f;
@@ -14,7 +16,9 @@ public class PauseMenu : MonoBehaviour
 
     public void GameIntro()
     {
-
+        intro.SetActive(true);
+        intro.GetComponent<GameIntroduction>().Init("Pause");
+        gameObject.SetActive(false);
     }
 
     public void QuitGame()

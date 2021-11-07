@@ -8,6 +8,7 @@ public class StartMenu : MonoBehaviour
     public Player player;
     public PlayerLocomotion locomotion;
     public CameraFollow cam;
+    public GameObject intro;
 
     private float oriSpeedFactor;
 
@@ -23,18 +24,9 @@ public class StartMenu : MonoBehaviour
 
     public void StartGame()
     {
-        playerUI.SetActive(true);
+        intro.SetActive(true);
+        intro.GetComponent<GameIntroduction>().Init("Start");
         gameObject.SetActive(false);
-        locomotion.movingSpeedFactor = oriSpeedFactor;
-        player.oriSpeedFactor = oriSpeedFactor;
-        cam.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    public void GameIntro()
-    {
-        
     }
 
     public void QuitGame()

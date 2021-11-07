@@ -86,11 +86,11 @@ public class PlayerLocomotion : MonoBehaviour
         }
         if (isJumping)
         {
-            if (rb.velocity.y < 6 && overJumping == false)
+            if (rb.velocity.y < 7 && overJumping == false)
             {
                 rb.velocity += jumpingForce * Vector3.up * Time.deltaTime;
             }
-            else if (rb.velocity.y >= 6)
+            else if (rb.velocity.y >= 7)
             {
                 overJumping = true;
             }

@@ -14,7 +14,14 @@ public class Castle : MonoBehaviour
         {
             Enemy enemy = other.GetComponent<Enemy>();
             health -= enemy.damageToCastle;
+            health = Mathf.Max(0f, health);
             healthText.text = health.ToString();
+
+            if(health == 0f)
+            {
+                GameManager.singleton.LoseTheGame();
+                Time.timeScale = 0f;
+            }
         }
     }
 }

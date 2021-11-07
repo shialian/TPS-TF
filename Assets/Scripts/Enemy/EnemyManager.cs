@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
     public bool allEnemyDead = true;
 
     private float timer = 0f;
-    private List<GameObject> currentEnemy = new List<GameObject>();
+    public List<GameObject> currentEnemy = new List<GameObject>();
     private int bubbleIndex;
     private int bubbleAmount;
 
@@ -34,7 +34,10 @@ public class EnemyManager : MonoBehaviour
         }
         else if(bubbleAmount == 0 && q.Count == 0 && allEnemyDead)
         {
-            GameManager.singleton.SetRemindTextOn();
+            if (GameManager.singleton.roundManager.roundIndex < 15)
+            {
+                GameManager.singleton.SetRemindTextOn();
+            }
         }
     }
 

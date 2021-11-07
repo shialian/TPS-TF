@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     public EnemyManager enemyManager;
     public Text roundsText;
     public GameObject remindText;
+    public bool winTheGame = false;
 
     public GunManager gunManager;
     public Transform[] availableBlocks;
@@ -29,12 +31,17 @@ public class GameManager : MonoBehaviour
     public bool playerIsDead = false;
 
     public GameObject pauseMenu;
+    public GameObject winMenu;
+    public GameObject loseMenu;
 
     private void Start()
     {
+        Time.timeScale = 1f;
         singleton = this;
+        winTheGame = false;
         pauseMenu.SetActive(false);
-        DontDestroyOnLoad(this);
+        winMenu.SetActive(false);
+        loseMenu.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -48,11 +55,16 @@ public class GameManager : MonoBehaviour
                 timer = 0f;
             }
         }
+        if(roundManager.roundIndex == 15 && enemyManager.q.Count == 0 && enemyManager.allEnemyDead)
+        {
+            winTheGame = true;
+            Invoke("WinTheGame", 3f);
+        }
     }
 
     private void SetFighterSupport()
     {
-        int supportCount = Random.Range(3, 6);
+        int supportCount = 3;
         Waypoints waypoints = fighter.GetComponent<Waypoints>();
         waypoints.waypoints = new Transform[supportCount + 1];
         waypoints.waypoints[0] = fighter.transform;
@@ -66,9 +78,23 @@ public class GameManager : MonoBehaviour
         f.Initialize(gunManager, waypoints);
     }
 
+    public void WinTheGame()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        winMenu.SetActive(true);
+    }
+
+    public void LoseTheGame()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        loseMenu.SetActive(true);
+    }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return) && enemyManager.allEnemyDead)
+        if(Input.GetKeyDown(KeyCode.Return) && enemyManager.allEnemyDead && roundManager.roundIndex < 15)
         {
             roundManager.NewRoundStart();
             roundsText.text = roundManager.roundIndex.ToString();
@@ -89,5 +115,10 @@ public class GameManager : MonoBehaviour
     public void SetRemindTextOn()
     {
         remindText.SetActive(true);
+    }
+
+    public void ReloadGame()
+    {
+        SceneManager.LoadScene("Velley");
     }
 }

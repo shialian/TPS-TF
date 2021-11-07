@@ -22,10 +22,15 @@ public class PlayerAnimation : MonoBehaviour
         locomotion = GetComponent<PlayerLocomotion>();
         player = GetComponent<Player>();
         SetAttackType(player.holdingGun.gunType, player.holdingGun.attackType);
+        anim.SetBool("Win", false);
     }
 
     private void Update()
     {
+        if (GameManager.singleton.winTheGame)
+        {
+            anim.SetBool("Win", true);
+        }
         if (locomotion.movingSpeedFactor > 0f)
         {
             SetRunning();

@@ -10021,7 +10021,7 @@ MonoBehaviour:
   HPBar: {fileID: 5734565255803024312}
   hitVFX: {fileID: 400004, guid: e4f631cc71486814bbdf8a626bfa3556, type: 3}
   playerDetect: 0
-  damageToCastle: 10
+  damageToCastle: 20
   bombVFX: {fileID: 0}
   waypointIndex: 1
   type: 3
