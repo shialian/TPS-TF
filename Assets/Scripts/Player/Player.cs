@@ -21,7 +21,9 @@ public class Player : MonoBehaviour
     public Sprite RedHealth;
     [SerializeField]
     private float currentHP;
+
     public bool isDead;
+    public GameObject deadUI;
 
     public Image[] states;
     public Sprite[] stateImages;
@@ -46,7 +48,7 @@ public class Player : MonoBehaviour
 
     private PlayerAnimation anim;
 
-    private float oriSpeedFactor;
+    public float oriSpeedFactor;
     private PlayerLocomotion locomotion;
 
     public enum State
@@ -68,9 +70,9 @@ public class Player : MonoBehaviour
         currentHP = maxHP;
         anim = GetComponent<PlayerAnimation>();
         locomotion = GetComponent<PlayerLocomotion>();
-        oriSpeedFactor = locomotion.movingSpeedFactor;
         currentGunIcon = gunIcon[0];
         oriColddown = colddown;
+        deadUI.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -78,7 +80,6 @@ public class Player : MonoBehaviour
         if(currentHP <= 0)
         {
             ForbiddenAnyActions();
-            isDead = true;
         }
         anim.SetState();
         timer += Time.fixedDeltaTime;
@@ -129,13 +130,17 @@ public class Player : MonoBehaviour
             onPoi = false;
         }
         colddown = 0.5f;
+        deadUI.SetActive(true);
+        isDead = true;
         GameManager.singleton.playerIsDead = true;
     }
 
     private void AllowAnyActions()
     {
         locomotion.movingSpeedFactor = oriSpeedFactor;
+        Debug.Log(locomotion.movingSpeedFactor);
         GameManager.singleton.playerIsDead = false;
+        deadUI.SetActive(false);
         isDead = false;
         colddown = oriColddown;
         anim.SetState();

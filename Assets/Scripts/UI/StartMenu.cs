@@ -5,6 +5,7 @@ using UnityEngine;
 public class StartMenu : MonoBehaviour
 {
     public GameObject playerUI;
+    public Player player;
     public PlayerLocomotion locomotion;
     public CameraFollow cam;
 
@@ -25,6 +26,7 @@ public class StartMenu : MonoBehaviour
         playerUI.SetActive(true);
         gameObject.SetActive(false);
         locomotion.movingSpeedFactor = oriSpeedFactor;
+        player.oriSpeedFactor = oriSpeedFactor;
         cam.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

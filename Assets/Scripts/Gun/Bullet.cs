@@ -45,8 +45,11 @@ public class Bullet : MonoBehaviour
                 break;
             case "Player":
                 Player player = other.GetComponent<Player>();
-                player.Damaged(damage);
-                player.SetState(attribute);
+                if (player.state != Player.State.die)
+                {
+                    player.Damaged(damage);
+                    player.SetState(attribute);
+                }
                 break;
         }
         creator.ResetBullet(this);
