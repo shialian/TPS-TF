@@ -68,11 +68,18 @@ public class PlayerAnimation : MonoBehaviour
             anim.GetCurrentAnimatorStateInfo(0).IsName(runningAttackState) ||
             anim.GetCurrentAnimatorStateInfo(0).IsName(jumpAttackState))
         {
+            anim.SetBool("IsDead", false);
             player.state = Player.State.Attacking;
         }
         else
         {
+            anim.SetBool("IsDead", false);
             player.state = Player.State.Normal;
+        }
+        if (player.isDead)
+        {
+            anim.SetBool("IsDead", true);
+            player.state = Player.State.die;
         }
     }
 

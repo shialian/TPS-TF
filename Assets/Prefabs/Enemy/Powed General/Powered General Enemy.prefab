@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7614522653624221186}
   - component: {fileID: 7614522653624221187}
   - component: {fileID: 7614522653624221196}
-  - component: {fileID: -5229684093352035489}
   m_Layer: 9
   m_Name: Powered General Enemy
   m_TagString: Enemy
@@ -116,20 +115,9 @@ MonoBehaviour:
   hitVFX: {fileID: 400004, guid: 90c2ff639a363494a83f303e37cb752c, type: 3}
   playerDetect: 0
   damageToCastle: 10
+  bombVFX: {fileID: 0}
   waypointIndex: 1
   type: 1
---- !u!114 &-5229684093352035489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7614522653624221197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97297d487de3e16479ff3e7c531e389c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7614522653940150300
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +130,7 @@ GameObject:
   - component: {fileID: 7614522653940150288}
   - component: {fileID: 7614522653940150289}
   - component: {fileID: 7614522653940150290}
+  - component: {fileID: 6228466707584297982}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -229,6 +218,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6228466707584297982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614522653940150300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97297d487de3e16479ff3e7c531e389c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7614522654658745555
 GameObject:
   m_ObjectHideFlags: 0

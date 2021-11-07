@@ -160,6 +160,8 @@
     <Compile Include="Assets\Scripts\Test\TestCollision.cs" />
     <Compile Include="Assets\Scripts\UI\LookAtPlayer.cs" />
     <Compile Include="Assets\Scripts\UI\NextRound.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\StartMenu.cs" />
     <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\FinalBlit.shader" />
     <None Include="Assets\Resource\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\ZPrepass.shader" />

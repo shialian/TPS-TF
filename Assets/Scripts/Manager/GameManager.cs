@@ -26,9 +26,14 @@ public class GameManager : MonoBehaviour
     public float colddown = 2f;
     private float timer = 20f;
 
+    public bool playerIsDead = false;
+
+    public GameObject pauseMenu;
+
     private void Start()
     {
         singleton = this;
+        pauseMenu.SetActive(false);
         DontDestroyOnLoad(this);
     }
 
@@ -71,6 +76,13 @@ public class GameManager : MonoBehaviour
             bomb = true;
             bombIcon.SetActive(true);
             timer = colddown;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 

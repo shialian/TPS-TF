@@ -66,7 +66,7 @@ public class Fighter : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && GameManager.singleton.bomb)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && GameManager.singleton.bomb && GameManager.singleton.playerIsDead == false)
         {
             DeliverBomb();
             GameManager.singleton.bombIcon.SetActive(false);

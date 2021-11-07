@@ -19,7 +19,9 @@ public class Player : MonoBehaviour
     public float recoverHP = 3f;
     public Sprite GreenHealth;
     public Sprite RedHealth;
+    [SerializeField]
     private float currentHP;
+    public bool isDead;
 
     public Image[] states;
     public Sprite[] stateImages;
@@ -35,10 +37,12 @@ public class Player : MonoBehaviour
     private int stateIndex = 0;
 
     public float colddown = 1f;
+    [SerializeField]
     private float timer = 0f;
     private float fireCountdown = 0f;
     private float eleCountdown = 0f;
     private float poiCountdown = 0f;
+    private float oriColddown;
 
     private PlayerAnimation anim;
 
@@ -48,7 +52,8 @@ public class Player : MonoBehaviour
     public enum State
     {
         Normal,
-        Attacking
+        Attacking,
+        die
     };
     [HideInInspector]
     public State state;
@@ -65,12 +70,17 @@ public class Player : MonoBehaviour
         locomotion = GetComponent<PlayerLocomotion>();
         oriSpeedFactor = locomotion.movingSpeedFactor;
         currentGunIcon = gunIcon[0];
+        oriColddown = colddown;
     }
 
     private void FixedUpdate()
     {
+        if(currentHP <= 0)
+        {
+            ForbiddenAnyActions();
+            isDead = true;
+        }
         anim.SetState();
-
         timer += Time.fixedDeltaTime;
         if (timer >= colddown)
         {
@@ -78,8 +88,57 @@ public class Player : MonoBehaviour
             currentHP = Mathf.Min(currentHP, maxHP);
             HPBar.value = currentHP / maxHP;
             timer = 0f;
+            if (currentHP / maxHP <= 0.3f)
+            {
+                fill.sprite = RedHealth;
+            }
+            else
+            {
+                fill.sprite = GreenHealth;
+            }
+            if (isDead && HPBar.value >= 0.3f)
+            {
+                AllowAnyActions();
+            }
         }
         SetHealthByState();
+    }
+
+    private void ForbiddenAnyActions()
+    {
+        locomotion.movingSpeedFactor = 0f;
+        if (onFire)
+        {
+            UpdateState(onFireIndex);
+            fireCountdown = 0f;
+            onFireIndex = -1;
+            onFire = false;
+        }
+        if (onEle)
+        {
+            UpdateState(onEleIndex);
+            eleCountdown = 0f;
+            onEleIndex = -1;
+            onEle = false;
+        }
+        if (onPoi)
+        {
+            UpdateState(onPoiIndex);
+            poiCountdown = 0f;
+            onPoiIndex = -1;
+            onPoi = false;
+        }
+        colddown = 0.5f;
+        GameManager.singleton.playerIsDead = true;
+    }
+
+    private void AllowAnyActions()
+    {
+        locomotion.movingSpeedFactor = oriSpeedFactor;
+        GameManager.singleton.playerIsDead = false;
+        isDead = false;
+        colddown = oriColddown;
+        anim.SetState();
     }
 
     private void SetHealthByState()

@@ -28,11 +28,15 @@ public class DetectZone : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            timer += Time.fixedDeltaTime;
-            if (timer >= colddown)
+            Player player = other.GetComponent<Player>();
+            if (player.isDead == false)
             {
-                self.Fire(other.transform);
-                timer = 0;
+                timer += Time.fixedDeltaTime;
+                if (timer >= colddown)
+                {
+                    self.Fire(other.transform);
+                    timer = 0;
+                }
             }
         }
     }
