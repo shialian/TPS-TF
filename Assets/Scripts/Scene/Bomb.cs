@@ -14,7 +14,7 @@ public class Bomb : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (firstActiveEnemy != null)
         {
@@ -22,7 +22,7 @@ public class Bomb : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
             transform.LookAt(firstActiveEnemy.position);
             transform.Rotate(90f, 0f, 0f);
-            rb.AddForce(500f * transform.up);
+            rb.AddForce(1500f * transform.up);
         }
     }
 
@@ -31,6 +31,7 @@ public class Bomb : MonoBehaviour
         EnemyManager enemyManager = GameObject.Find("Enemy Pool").GetComponent<EnemyManager>();
         Instantiate(bombVFX, transform.position, transform.rotation);
         enemyManager.GetBomb(transform.position, 8f);
+        SoundManager.singleton.SetBomb();
         Destroy(this.gameObject);
     }
 }

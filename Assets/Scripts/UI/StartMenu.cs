@@ -9,6 +9,7 @@ public class StartMenu : MonoBehaviour
     public PlayerLocomotion locomotion;
     public CameraFollow cam;
     public GameObject intro;
+    public GameObject volumeMenu;
 
     private float oriSpeedFactor;
 
@@ -26,6 +27,12 @@ public class StartMenu : MonoBehaviour
     {
         intro.SetActive(true);
         intro.GetComponent<GameIntroduction>().Init("Start");
+        gameObject.SetActive(false);
+    }
+
+    public void VolumeSetting()
+    {
+        volumeMenu.SetActive(true);
         gameObject.SetActive(false);
     }
 

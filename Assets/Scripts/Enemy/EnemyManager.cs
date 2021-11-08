@@ -55,6 +55,10 @@ public class EnemyManager : MonoBehaviour
 
     public bool CheckAllDead()
     {
+        if(bubbleAmount != 0)
+        {
+            return false;
+        }
         for(int i = 0; i < currentEnemy.Count; i++)
         {
             if (currentEnemy[i].activeSelf == true)

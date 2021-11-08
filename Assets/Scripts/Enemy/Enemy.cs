@@ -99,6 +99,14 @@ public class Enemy : MonoBehaviour
                 Instantiate(bombVFX, transform.position, transform.rotation);
                 enemyManager.GetBomb(transform.position, 12f);
             }
+            if(type == Type.Bomb)
+            {
+                SoundManager.singleton.SetBomb();
+            }
+            else
+            {
+                SoundManager.singleton.SetBubble();
+            }
             creator.ResetEnemy(this);
         }
         HPBar.value = currentHP / maxHP;

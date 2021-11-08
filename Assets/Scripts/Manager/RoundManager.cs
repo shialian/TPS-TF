@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 
 public class RoundManager : MonoBehaviour
 {
     public string filePath;
     public EnemyManager manager;
+    public Text totalRounds;
 
     private StreamReader reader;
     private string[] roundData;
@@ -19,6 +21,11 @@ public class RoundManager : MonoBehaviour
         reader = new StreamReader(filePath);
         roundData = reader.ReadToEnd().Split('\n');
         reader.Close();
+    }
+
+    private void Start()
+    {
+        totalRounds.text = roundData.Length.ToString();
     }
 
     public void NewRoundStart()

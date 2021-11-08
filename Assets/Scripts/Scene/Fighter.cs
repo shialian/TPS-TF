@@ -8,13 +8,15 @@ public class Fighter : MonoBehaviour
     public Transform bomb;
 
     private GunManager gunManager;
+    private EnemyManager enemyManager;
     private Waypoints waypoints;
     private int waypointIndex = 1;
 
-    public void Initialize(GunManager gunMgr, Waypoints wPoints)
+    public void Initialize(GunManager gunMgr, Waypoints wPoints, EnemyManager enyMgr)
     {
         gunManager = gunMgr;
         waypoints = wPoints;
+        enemyManager = enyMgr;
         SetForward();
     }
 
@@ -23,6 +25,11 @@ public class Fighter : MonoBehaviour
         if(waypoints.waypoints.Length > 0)
         {
             MovingTowardWaypoint();
+        }
+        if (enemyManager.allEnemyDead)
+        {
+            GameManager.singleton.fighterSupportIcon.SetActive(false);
+            Destroy(this.gameObject);
         }
     }
 
@@ -47,6 +54,7 @@ public class Fighter : MonoBehaviour
         }
         else
         {
+            GameManager.singleton.fighterSupportIcon.SetActive(false);
             Destroy(this.gameObject);
         }
     }

@@ -132,6 +132,7 @@ public class Player : MonoBehaviour
         colddown = 0.5f;
         deadUI.SetActive(true);
         isDead = true;
+        SoundManager.singleton.SetDie();
         GameManager.singleton.playerIsDead = true;
     }
 
