@@ -191,7 +191,7 @@ MonoBehaviour:
   m_MinSize: {x: 911, y: 342}
   m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
-  controlID: 206
+  controlID: 198
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -957,9 +957,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 243f0100
-      m_LastClickedID: 81700
-      m_ExpandedIDs: 82dcffffa2dcffff0adeffff66fbffff403d0100
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: c6c5ffffe6c5ffff52c7ffff28dfffff48dfffffb0e0ffff66fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1022,20 +1022,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Music/BGM
+    - Assets/Scripts/Scene
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Music/BGM
+  - Assets/Scripts/Scene
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "D:\\\u5728\u4EA4\u5927\u7684\u6771\u6771\\\u6578\u4F4D\u904A\u6232\u8207\u5B78\u7FD2\\HW5\\TPS+TF"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 76880000
-    m_LastClickedID: 34934
-    m_ExpandedIDs: 00000000f88600006a88000000ca9a3b
+    m_SelectedIDs: be380100
+    m_LastClickedID: 80062
+    m_ExpandedIDs: 00000000f88600006a8800007288000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: bebd00002cb7feffe0102200be6d0700ee2a240048640000606400001e880700065c0000b2352a00dab007007eb10700925f00000cb62d0080010100427900009a7b0000f47f00009c7d00002a830000666d0000247f0000e8800000e46d00005c7a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
