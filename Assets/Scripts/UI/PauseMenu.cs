@@ -5,6 +5,7 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject intro;
+    public GameObject setting;
 
     public void Continue()
     {
@@ -18,6 +19,13 @@ public class PauseMenu : MonoBehaviour
     {
         intro.SetActive(true);
         intro.GetComponent<GameIntroduction>().Init("Pause");
+        gameObject.SetActive(false);
+    }
+
+    public void VolumeSetting()
+    {
+        setting.gameObject.SetActive(true);
+        GameManager.singleton.gameStarted = true;
         gameObject.SetActive(false);
     }
 

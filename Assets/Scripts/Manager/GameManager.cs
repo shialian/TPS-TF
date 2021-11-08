@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Fighter fighter;
     public bool bomb = true;
     public GameObject bombIcon;
+    public GameObject fighterSupportIcon;
 
     public bool poisonous = false;
     public Material virus;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     public bool playerIsDead = false;
 
+    public bool gameStarted = false;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         singleton = this;
         winTheGame = false;
+        gameStarted = false;
         pauseMenu.SetActive(false);
         winMenu.SetActive(false);
         loseMenu.SetActive(false);
@@ -75,20 +78,24 @@ public class GameManager : MonoBehaviour
         }
         
         Fighter f = Instantiate(fighter);
-        f.Initialize(gunManager, waypoints);
+        f.Initialize(gunManager, waypoints, enemyManager);
+        fighterSupportIcon.SetActive(true);
     }
 
     public void WinTheGame()
     {
+        AudioManager.singleton.SetWin();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         winMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void LoseTheGame()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        AudioManager.singleton.SetLose();
         loseMenu.SetActive(true);
     }
 

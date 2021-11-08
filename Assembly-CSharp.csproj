@@ -145,8 +145,10 @@
     <Compile Include="Assets\Scripts\Gun\Gun.cs" />
     <Compile Include="Assets\Scripts\Gun\GunManager.cs" />
     <Compile Include="Assets\Scripts\Gun\GunPack.cs" />
+    <Compile Include="Assets\Scripts\Manager\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\RoundManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\On Eidtor Mode\PlantTrees.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
@@ -158,11 +160,14 @@
     <Compile Include="Assets\Scripts\Scene\Fighter.cs" />
     <Compile Include="Assets\Scripts\Scene\River.cs" />
     <Compile Include="Assets\Scripts\Test\Mod.cs" />
+    <Compile Include="Assets\Scripts\Test\Screenshot.cs" />
     <Compile Include="Assets\Scripts\Test\TestCollision.cs" />
+    <Compile Include="Assets\Scripts\UI\FightSupportUI.cs" />
     <Compile Include="Assets\Scripts\UI\GameIntroduction.cs" />
     <Compile Include="Assets\Scripts\UI\LookAtPlayer.cs" />
     <Compile Include="Assets\Scripts\UI\NextRound.cs" />
     <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\SoundSetting.cs" />
     <Compile Include="Assets\Scripts\UI\StartMenu.cs" />
     <Compile Include="Assets\Scripts\UI\WinAndLose.cs" />
     <None Include="Assets\Resource\Easy performant outline\Resources\Easy performant outline\Shaders\FinalBlit.shader" />

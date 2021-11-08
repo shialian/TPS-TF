@@ -27,6 +27,7 @@ public class GameIntroduction : MonoBehaviour
         totalLength = introductions.Length + weaponIntroductions.Length + bubbleIntroductions.Length;
         startText.text = "遊戲開始";
         currIntroduction = introductions[0];
+        oriSpeedFactor = 5f;
     }
 
     public void Init(string from)
@@ -131,6 +132,7 @@ public class GameIntroduction : MonoBehaviour
             player.oriSpeedFactor = oriSpeedFactor;
             cam.enabled = true;
             Cursor.visible = false;
+            AudioManager.singleton.SetGaming();
             gameObject.SetActive(false);
         }
         else

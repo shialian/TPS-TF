@@ -47,6 +47,7 @@ public class PlayerShoot : MonoBehaviour
                 {
                     player.holdingGun.ShootBullet(cam.position + player.holdingGun.force * cam.forward);
                 }
+                SoundManager.singleton.SetShoot();
                 timer = 0f;
             }
         }
