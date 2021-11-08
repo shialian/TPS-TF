@@ -45,7 +45,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 5}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 461}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &3
@@ -120,7 +120,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 461}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &6
 MonoBehaviour:
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_MinSize: {x: 911, y: 342}
   m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
-  controlID: 198
+  controlID: 149
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -342,8 +342,8 @@ MonoBehaviour:
     y: 0
     width: 422
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.07037996, y: -0.028905619, z: 0.0036125635, w: -0.99727076}
     speed: 2
-    m_Value: {x: -0.07036761, y: -0.028900547, z: 0.0036119297, w: -0.9970958}
+    m_Value: {x: -0.07037996, y: -0.028905619, z: 0.0036125635, w: -0.99727076}
   m_Size:
     m_Target: 471.69907
     speed: 2
@@ -959,7 +959,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c6c5ffffe6c5ffff52c7ffff28dfffff48dfffffb0e0ffff66fbffff
+      m_ExpandedIDs: 66fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1022,20 +1022,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Scene
+    - Assets/Resource/AllSkyFree
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/Scene
+  - Assets/Resource/AllSkyFree
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "D:\\\u5728\u4EA4\u5927\u7684\u6771\u6771\\\u6578\u4F4D\u904A\u6232\u8207\u5B78\u7FD2\\HW5\\TPS+TF"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: be380100
-    m_LastClickedID: 80062
-    m_ExpandedIDs: 00000000f88600006a8800007288000000ca9a3b
+    m_SelectedIDs: 8c880000
+    m_LastClickedID: 34956
+    m_ExpandedIDs: 00000000f88600006e880000728800008c88000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
