@@ -34,7 +34,7 @@ public class PlayerAnimation : MonoBehaviour
         if (locomotion.movingSpeedFactor > 0f)
         {
             SetRunning();
-            SetJump();
+            SetOnGround();
             SetAttack();
         }
         else
@@ -50,9 +50,9 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("Speed", locomotion.movingSpeed);
     }
 
-    private void SetJump()
+    private void SetOnGround()
     {
-        anim.SetBool("IsJumping", locomotion.isJumping);
+        anim.SetBool("IsOnGround", locomotion.onGround);
     }
 
     private void SetAttack()
@@ -86,17 +86,6 @@ public class PlayerAnimation : MonoBehaviour
             anim.SetBool("IsDead", true);
             player.state = Player.State.die;
         }
-    }
-
-    public void Falling()
-    {
-        anim.SetBool("IsFalling", true);
-        Invoke("FallingEnd", 0.1f);
-    }
-
-    private void FallingEnd()
-    {
-        anim.SetBool("IsFalling", false);
     }
 
     public void SetAttackType(Gun.GunType gunType, Gun.AttackType attackType)

@@ -30,7 +30,14 @@ public class PlayerLocomotion : MonoBehaviour
     public float lowJumpMultiplier = 2f;
     [HideInInspector]
     public bool isJumping = false;
-    private bool overJumping = false;
+
+    // Jump Refactoring
+    public float maxSpeed = 10f;
+    public float maxAcceleration = 10f;
+    public float jumpHeight = 2.5f;
+    [HideInInspector]
+    public bool onGround;
+    private bool desiredJump;
 
     // Input
     public string vertical = "Vertical";
@@ -53,53 +60,19 @@ public class PlayerLocomotion : MonoBehaviour
     private void Update()
     {
         UpdateInput();
-        UpdateJumpingVelocity();
-        if (Input.GetKey(jumpingKey) && movingSpeedFactor > 0f)
-        {
-            Jumping();
-        }
     }
 
     private void UpdateInput()
     {
         forwardSpeed = Input.GetAxis(vertical);
         rightSpeed = Input.GetAxis(horizontal);
-    }
-
-    private void UpdateJumpingVelocity()
-    {
-        if (rb.velocity.y < 0)
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-        else if (rb.velocity.y > 0 && !Input.GetKey(jumpingKey))
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }
-    }
-
-    private void Jumping()
-    {
-        if (isJumping == false && anim.anim.GetBool("IsFalling") == false)
-        {
-            isJumping = true;
-        }
-        if (isJumping)
-        {
-            if (rb.velocity.y < 7 && overJumping == false)
-            {
-                rb.velocity += jumpingForce * Vector3.up * Time.deltaTime;
-            }
-            else if (rb.velocity.y >= 7)
-            {
-                overJumping = true;
-            }
-        }
+        desiredJump |= Input.GetKeyDown(jumpingKey);
     }
 
     private void FixedUpdate()
     {
         UpdatePosition();
+        onGround = false;
     }
 
     private void UpdatePosition()
@@ -107,6 +80,11 @@ public class PlayerLocomotion : MonoBehaviour
         SetDirectionAndRotation();
         SetMovingSpeed();
         SetPosition();
+        if (desiredJump)
+        {
+            desiredJump = false;
+            Jump();
+        }
     }
 
     public void SetDirectionAndRotation()
@@ -135,7 +113,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void SetMovingSpeed()
     {
-        movingSpeed = Mathf.Sqrt(Mathf.Pow(forwardSpeed, 2.0f) + Mathf.Pow(rightSpeed, 2.0f));  // 控制在0~1之間
+        movingSpeed = Mathf.Sqrt(Mathf.Pow(forwardSpeed, 2.0f) + Mathf.Pow(rightSpeed, 2.0f));
         if (collideWall)
         {
             movingSpeed = 0f;
@@ -147,48 +125,32 @@ public class PlayerLocomotion : MonoBehaviour
         transform.position += movingSpeedFactor * movingSpeed * Time.fixedDeltaTime * movingDirection;
     }
 
+    private void Jump()
+    {
+        if (onGround)
+        {
+            Vector3 velocity = rb.velocity;
+            velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+            rb.velocity = velocity;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        Ray downRay = new Ray(player.GetRayCastingPosition(), -transform.up);
-        RaycastHit hit;
-
-        if (Physics.Raycast(downRay, out hit, 100f, ~(1 << 8)))  // Player的layer是8，不要偵測
-        {
-            if (hit.distance <= 0.1f)
-            {
-                if (isJumping)
-                {
-                    anim.Falling();
-                }
-                overJumping = false;
-                isJumping = false;
-            }
-        }
-        rb.angularVelocity = Vector3.zero;
+        EvaluateCollisionType(collision);
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        Ray downRay = new Ray(player.GetRayCastingPosition(), -transform.up);
-        RaycastHit hit;
+        EvaluateCollisionType(collision);
+    }
 
-        collideWall = false;
-
-        if (Physics.Raycast(downRay, out hit, 100f, ~(1 << 8)))  // Player的layer是8，不要偵測
+    private void EvaluateCollisionType(Collision collision)
+    {
+        for(int i = 0; i < collision.contactCount; i++)
         {
-            foreach (ContactPoint cp in collision.contacts)
-            {
-                if (cp.otherCollider.tag == "Plane" && cp.otherCollider.transform.position.y != hit.collider.transform.position.y)
-                {
-                    rb.velocity =  new Vector3(0f, rb.velocity.y, 0f);
-                    rb.angularVelocity = Vector3.zero;
-                    if (Vector3.Dot(cp.normal, movingDirection) < 0f)
-                    {
-                        collideWall = true;
-                    }
-                    break;
-                }
-            }
+            Vector3 normal = collision.GetContact(i).normal;
+            onGround |= normal.y >= 0.9f;
         }
     }
 }
