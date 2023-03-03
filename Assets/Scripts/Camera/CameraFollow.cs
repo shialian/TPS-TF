@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     private Transform player;
+    private Camera cam;
 
     public float lookAtDistance = 2.5f;  // 相機從多遠看玩家
     public float scrollSpeed = 1.0f;  // 相機滑近滑遠的速度
@@ -35,6 +36,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Awake()
     {
+        cam = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -78,6 +80,7 @@ public class CameraFollow : MonoBehaviour
         verticalRotation += rotationSpeedFactor * mouseY;
         horizontalRotation += rotationSpeedFactor * -mouseX;
         verticalRotation = Limit(verticalRotation, verticalRotationUpperBound, verticalRotationLowerBound);
+        KeepViewClear();
         float rotationPhi = verticalRotation * Mathf.Deg2Rad;
         float rotationTheta = horizontalRotation * Mathf.Deg2Rad;
         float pointX = lookAtDistance * Mathf.Cos(rotationPhi) * Mathf.Cos(rotationTheta);
@@ -86,6 +89,14 @@ public class CameraFollow : MonoBehaviour
         Vector3 newPosition = new Vector3(pointX, pointY, pointZ);
         newPosition = RoundVector3(newPosition, -3);
         return newPosition;
+    }
+
+    private void KeepViewClear()
+    {
+        if (Physics.SphereCast(transform.position, cam.nearClipPlane, transform.forward, out RaycastHit hit, lookAtDistance))
+        {
+            lookAtDistance = Mathf.Min(lookAtDistance, hit.distance);
+        }
     }
 
     private Vector3 RoundVector3(Vector3 vector, int digit)

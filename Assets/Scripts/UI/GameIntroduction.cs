@@ -134,6 +134,7 @@ public class GameIntroduction : MonoBehaviour
             Cursor.visible = false;
             AudioManager.singleton.SetGaming();
             gameObject.SetActive(false);
+            GameManager.singleton.gameStarted = true;
         }
         else
         {

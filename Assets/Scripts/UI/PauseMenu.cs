@@ -25,7 +25,6 @@ public class PauseMenu : MonoBehaviour
     public void VolumeSetting()
     {
         setting.gameObject.SetActive(true);
-        GameManager.singleton.gameStarted = true;
         gameObject.SetActive(false);
     }
 

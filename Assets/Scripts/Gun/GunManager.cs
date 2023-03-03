@@ -12,16 +12,13 @@ public class GunManager : MonoBehaviour
         gunPool = new GunPool(gunPrefab[0]);
     }
 
-    public Transform CreateGun(Vector3 position)
+    public void CreateGun(Vector3 position)
     {
         int randomIndex = Random.Range(0, gunPrefab.Length);
         Transform gun = gunPool.Rent(gunPrefab[randomIndex]);
         gun.SetParent(transform);
         gun.position = position;
         gun.name = gunPrefab[randomIndex].name;
-        //StartCoroutine(ResetBullet(gun, 2.0f));
-
-        return gun;
     }
 
     IEnumerator ResetBullet(Transform gun, float delayTime)

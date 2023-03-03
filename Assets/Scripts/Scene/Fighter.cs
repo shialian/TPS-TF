@@ -29,7 +29,7 @@ public class Fighter : MonoBehaviour
         if (enemyManager.allEnemyDead)
         {
             GameManager.singleton.fighterSupportIcon.SetActive(false);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -55,7 +55,7 @@ public class Fighter : MonoBehaviour
         else
         {
             GameManager.singleton.fighterSupportIcon.SetActive(false);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
     

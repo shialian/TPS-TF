@@ -134,10 +134,12 @@
     <Compile Include="Assets\Scripts\Gun\Gun.cs" />
     <Compile Include="Assets\Scripts\Gun\GunManager.cs" />
     <Compile Include="Assets\Scripts\Gun\GunPack.cs" />
-    <Compile Include="Assets\Scripts\Manager\AudioManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\RoundManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Gun\SupportGun.cs" />
+    <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\RoundManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\On Eidtor Mode\PlantTrees.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
