@@ -54,7 +54,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void Start()
     {
         singleton = this;
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        mainCamera = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
         player = GetComponent<Player>();
         anim = GetComponent<PlayerAnimation>();

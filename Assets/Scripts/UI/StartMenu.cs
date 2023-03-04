@@ -7,7 +7,6 @@ public class StartMenu : MonoBehaviour
     public GameObject playerUI;
     public Player player;
     public PlayerLocomotion locomotion;
-    public CameraFollow cam;
     public GameObject intro;
     public GameObject volumeMenu;
 
@@ -18,7 +17,6 @@ public class StartMenu : MonoBehaviour
         playerUI.SetActive(false);
         oriSpeedFactor = locomotion.movingSpeedFactor;
         locomotion.movingSpeedFactor = 0f;
-        cam.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

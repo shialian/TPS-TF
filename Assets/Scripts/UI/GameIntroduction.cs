@@ -13,7 +13,6 @@ public class GameIntroduction : MonoBehaviour
     public GameObject playerUI;
     public Player player;
     public PlayerLocomotion locomotion;
-    public CameraFollow cam;
 
     private int index;
     private int initLength;
@@ -130,7 +129,6 @@ public class GameIntroduction : MonoBehaviour
             playerUI.SetActive(true);
             locomotion.movingSpeedFactor = oriSpeedFactor;
             player.oriSpeedFactor = oriSpeedFactor;
-            cam.enabled = true;
             Cursor.visible = false;
             AudioManager.singleton.SetGaming();
             gameObject.SetActive(false);
