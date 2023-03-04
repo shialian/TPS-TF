@@ -6,37 +6,23 @@ public class GunManager : MonoBehaviour
 {
     public static GunManager singleton;
 
-    public SupportGun[] gunPrefab;
-    private GunPool gunPool = null;
+    public GunCreator[] gunCreators;
 
     private void Start()
     {
         singleton = this;
-        gunPool = new GunPool(gunPrefab[0]);
     }
 
     public void CreateGun(Vector3 position, Transform dropBlock)
     {
-        int randomIndex = Random.Range(0, gunPrefab.Length);
-        SupportGun gun = gunPool.Rent(gunPrefab[randomIndex]);
-        gun.transform.SetParent(transform);
-        gun.transform.position = position;
-        gun.name = gunPrefab[randomIndex].name;
+        int randomIndex = Random.Range(0, gunCreators.Length);
+        SupportGun gun = gunCreators[randomIndex].CreateGun(position);
         gun.dropBlock = dropBlock;
     }
 
-    public void ResetGun(SupportGun gun)
+    public void ResetGun(SupportGun gun, GunCreator creator)
     {
         Fighter.singleton.SetBlockAvailable(gun.dropBlock);
-        gunPool.Return(gun);
-    }
-}
-
-public class GunPool : PrefabPool<SupportGun>
-{
-    public GunPool(SupportGun gun) : base(gun) { }
-    protected override void OnBeforeReturn(SupportGun instance)
-    {
-        base.OnBeforeReturn(instance);
+        creator.ResetGun(gun);
     }
 }

@@ -7,6 +7,13 @@ public class SupportGun : MonoBehaviour
     public float rotation;
     public Transform dropBlock;
 
+    private GunCreator creator;
+
+    public void Initialize(GunCreator ctr)
+    {
+        creator = ctr;
+    }
+
     private void FixedUpdate()
     {
         transform.Rotate(0, rotation, 0);
@@ -16,7 +23,7 @@ public class SupportGun : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            GunManager.singleton.ResetGun(this);
+            GunManager.singleton.ResetGun(this, creator);
         }
     }
 }

@@ -59,6 +59,15 @@ public class UIManager : MonoBehaviour
         remindText.SetActive(activation);
     }
 
+    public void Resume(GameObject ui)
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1f;
+        ui.SetActive(false);
+        SoundManager.singleton.Resume();
+    }
+
     public void Win()
     {
         Cursor.lockState = CursorLockMode.None;

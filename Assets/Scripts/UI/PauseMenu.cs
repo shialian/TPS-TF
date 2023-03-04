@@ -7,12 +7,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject intro;
     public GameObject setting;
 
-    public void Continue()
+    public void Resume()
     {
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        gameObject.SetActive(false);
+        UIManager.singleton.Resume(gameObject);
     }
 
     public void GameIntro()

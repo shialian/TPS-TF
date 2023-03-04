@@ -125,22 +125,12 @@ public class GameIntroduction : MonoBehaviour
         if (startText.text == "遊戲開始")
         {
             startText.text = "回到遊戲";
-            Cursor.lockState = CursorLockMode.Locked;
             playerUI.SetActive(true);
             locomotion.movingSpeedFactor = oriSpeedFactor;
             player.oriSpeedFactor = oriSpeedFactor;
-            Cursor.visible = false;
             AudioManager.singleton.SetGaming();
-            gameObject.SetActive(false);
             GameManager.singleton.gameStarted = true;
-            Time.timeScale = 1f;
         }
-        else
-        {
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            gameObject.SetActive(false);
-        }
+        UIManager.singleton.Resume(gameObject);
     }
 }

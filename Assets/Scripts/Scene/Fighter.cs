@@ -56,6 +56,7 @@ public class Fighter : MonoBehaviour
             Transform selectblock = availableBlocks[Random.Range(0, availableBlocks.Count)];
             waypoints.waypoints[i] = selectblock;
         }
+        waypointIndex = 1;
     }
 
 
