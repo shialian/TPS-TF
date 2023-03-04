@@ -34,9 +34,16 @@ public class EnemyManager : MonoBehaviour
         }
         else if(bubbleAmount == 0 && q.Count == 0 && allEnemyDead)
         {
-            if (GameManager.singleton.roundManager.roundIndex < 15)
+            if (GameManager.singleton.gameStarted)
             {
-                GameManager.singleton.SetRemindTextOn();
+                if (RoundManager.singleton.NoRounds())
+                {
+                    StartCoroutine(GameManager.singleton.WinTheGame(3f));
+                }
+                else
+                {
+                    UIManager.singleton.SetRemind(true);
+                }
             }
         }
     }

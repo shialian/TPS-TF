@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    public static PlayerLocomotion singleton;
+
     private Player player;
 
     // Camera
@@ -51,6 +53,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Start()
     {
+        singleton = this;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
         rb = GetComponent<Rigidbody>();
         player = GetComponent<Player>();

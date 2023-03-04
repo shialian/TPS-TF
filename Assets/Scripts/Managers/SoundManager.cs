@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip bubble;
     public AudioClip bomb;
     public AudioClip die;
+    public AudioClip airplane;
 
     public AudioSource source;
 
@@ -38,5 +39,25 @@ public class SoundManager : MonoBehaviour
     public void SetDie()
     {
         source.PlayOneShot(die);
+    }
+
+    public void SetAirPlane()
+    {
+        source.PlayOneShot(airplane);
+    }
+
+    public void Pause()
+    {
+        source.Pause();
+    }
+
+    public void Resume()
+    {
+        source.UnPause();
+    }
+
+    public void Stop()
+    {
+        source.Stop();
     }
 }

@@ -5,9 +5,18 @@ using UnityEngine;
 public class SupportGun : MonoBehaviour
 {
     public float rotation;
+    public Transform dropBlock;
 
     private void FixedUpdate()
     {
         transform.Rotate(0, rotation, 0);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            GunManager.singleton.ResetGun(this);
+        }
     }
 }

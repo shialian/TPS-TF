@@ -6,6 +6,8 @@ using System.IO;
 
 public class RoundManager : MonoBehaviour
 {
+    public static RoundManager singleton;
+
     public string filePath;
     public EnemyManager manager;
     public Text totalRounds;
@@ -25,7 +27,13 @@ public class RoundManager : MonoBehaviour
 
     private void Start()
     {
+        singleton = this;
         totalRounds.text = roundData.Length.ToString();
+    }
+
+    public bool NoRounds()
+    {
+        return roundIndex == roundData.Length;
     }
 
     public void NewRoundStart()

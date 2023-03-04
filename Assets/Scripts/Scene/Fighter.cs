@@ -4,32 +4,73 @@ using UnityEngine;
 
 public class Fighter : MonoBehaviour
 {
+    public static Fighter singleton;
+
+    public Vector3 startPosition;
+    public Vector3 startRotation;
     public float movingSpeed;
+    public int supportCount;
+
     public Transform bomb;
+    public List<Transform> availableBlocks;
+    public GameObject fighterSupportIcon;
 
     private GunManager gunManager;
     private EnemyManager enemyManager;
     private Waypoints waypoints;
     private int waypointIndex = 1;
+    private bool support = false;
 
-    public void Initialize(GunManager gunMgr, Waypoints wPoints, EnemyManager enyMgr)
+    private void Start()
+    {
+        singleton = this;
+    }
+
+    public void Initialize(GunManager gunMgr, EnemyManager enyMgr)
     {
         gunManager = gunMgr;
-        waypoints = wPoints;
         enemyManager = enyMgr;
+        ResetPose();
+        GenerateWaypoints();
         SetForward();
+        fighterSupportIcon.SetActive(true);
+        support = true;
     }
+
+    private void ResetPose()
+    {
+        transform.position = startPosition;
+        transform.rotation =Quaternion.Euler(startRotation);
+    }
+
+    private void GenerateWaypoints()
+    {
+        if (waypoints == null)
+        {
+            waypoints = GetComponent<Waypoints>();
+        }
+        waypoints.waypoints = new Transform[supportCount + 1];
+        waypoints.waypoints[0] = transform;
+        for (int i = 1; i <= supportCount; i++)
+        {
+            Transform selectblock = availableBlocks[Random.Range(0, availableBlocks.Count)];
+            waypoints.waypoints[i] = selectblock;
+        }
+    }
+
 
     private void FixedUpdate()
     {
-        if(waypoints.waypoints.Length > 0)
+        if(support)
         {
             MovingTowardWaypoint();
         }
         if (enemyManager.allEnemyDead)
         {
-            GameManager.singleton.fighterSupportIcon.SetActive(false);
-            Destroy(gameObject);
+            fighterSupportIcon.SetActive(false);
+            support = false;
+            gameObject.SetActive(false);
+            SoundManager.singleton.Stop();
         }
     }
 
@@ -40,6 +81,7 @@ public class Fighter : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, towardPosition, movingSpeed * Time.fixedDeltaTime);
         if (Vector3.Distance(transform.position, towardPosition) < 0.1f)
         {
+            DeliverGun(waypoints.waypoints[waypointIndex]);
             GoToNextDestination();
         }
     }
@@ -50,12 +92,13 @@ public class Fighter : MonoBehaviour
         {
             waypointIndex++;
             SetForward();
-            DeliverGun();
         }
         else
         {
-            GameManager.singleton.fighterSupportIcon.SetActive(false);
-            Destroy(gameObject);
+            fighterSupportIcon.SetActive(false);
+            support = false;
+            gameObject.SetActive(false);
+            SoundManager.singleton.Stop();
         }
     }
     
@@ -67,9 +110,10 @@ public class Fighter : MonoBehaviour
         transform.forward = towardDirection;
     }
 
-    private void DeliverGun()
+    private void DeliverGun(Transform dropBlock)
     {
-        gunManager.CreateGun(transform.position);
+        gunManager.CreateGun(transform.position, dropBlock);
+        availableBlocks.Remove(dropBlock);
     }
 
     private void Update()
@@ -92,5 +136,10 @@ public class Fighter : MonoBehaviour
             Transform bombInstant = Instantiate(bomb.transform, transform.position, transform.rotation);
             bombInstant.GetComponent<Bomb>().firstActiveEnemy = firstActiveEnemy;
         }
+    }
+
+    public void SetBlockAvailable(Transform dropBlock)
+    {
+        availableBlocks.Add(dropBlock);
     }
 }

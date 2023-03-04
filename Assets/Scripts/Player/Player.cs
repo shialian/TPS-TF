@@ -267,7 +267,6 @@ public class Player : MonoBehaviour
                 bulletAmountText.text = holdingGun.currentBulletAmount.ToString();
                 SetAttackType();
                 SetGunIcon(i);
-                gun.gameObject.SetActive(false);
             }
         }
     }

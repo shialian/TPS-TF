@@ -4,39 +4,38 @@ using UnityEngine;
 
 public class GunManager : MonoBehaviour
 {
-    public Transform[] gunPrefab;
+    public static GunManager singleton;
+
+    public SupportGun[] gunPrefab;
     private GunPool gunPool = null;
 
     private void Start()
     {
+        singleton = this;
         gunPool = new GunPool(gunPrefab[0]);
     }
 
-    public void CreateGun(Vector3 position)
+    public void CreateGun(Vector3 position, Transform dropBlock)
     {
         int randomIndex = Random.Range(0, gunPrefab.Length);
-        Transform gun = gunPool.Rent(gunPrefab[randomIndex]);
-        gun.SetParent(transform);
-        gun.position = position;
+        SupportGun gun = gunPool.Rent(gunPrefab[randomIndex]);
+        gun.transform.SetParent(transform);
+        gun.transform.position = position;
         gun.name = gunPrefab[randomIndex].name;
+        gun.dropBlock = dropBlock;
     }
 
-    IEnumerator ResetBullet(Transform gun, float delayTime)
+    public void ResetGun(SupportGun gun)
     {
-        yield return new WaitForSeconds(delayTime);
-        gunPool.Return(gun);
-    }
-
-    public void ResetBullet(Transform gun)
-    {
+        Fighter.singleton.SetBlockAvailable(gun.dropBlock);
         gunPool.Return(gun);
     }
 }
 
-public class GunPool : PrefabPool<Transform>
+public class GunPool : PrefabPool<SupportGun>
 {
-    public GunPool(Transform gun) : base(gun) { }
-    protected override void OnBeforeReturn(Transform instance)
+    public GunPool(SupportGun gun) : base(gun) { }
+    protected override void OnBeforeReturn(SupportGun instance)
     {
         base.OnBeforeReturn(instance);
     }

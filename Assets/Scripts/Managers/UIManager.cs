@@ -4,11 +4,34 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject pauseMenu;
+    public static UIManager singleton;
+
+    [SerializeField]
+    private GameObject remindText;
+    [SerializeField]
+    private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject winMenu;
+    [SerializeField]
+    private GameObject loseMenu;
+
+    private void Start()
+    {
+        singleton = this;
+        HideMenu();
+    }
+
+    private void HideMenu()
+    {
+        remindText.SetActive(false);
+        pauseMenu.SetActive(false);
+        winMenu.SetActive(false);
+        loseMenu.SetActive(false);
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.singleton.gameStarted)
         {
             Pause();
         }
@@ -19,7 +42,36 @@ public class UIManager : MonoBehaviour
         bool state = !pauseMenu.activeSelf;
         Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = state;
-        pauseMenu.SetActive(state);
         Time.timeScale = state ? 0f : 1f;
+        pauseMenu.SetActive(state);
+        if (state)
+        {
+            SoundManager.singleton.Pause();
+        }
+        else
+        {
+            SoundManager.singleton.Resume();
+        }
+    }
+
+    public void SetRemind(bool activation)
+    {
+        remindText.SetActive(activation);
+    }
+
+    public void Win()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        winMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void Lose()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        loseMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

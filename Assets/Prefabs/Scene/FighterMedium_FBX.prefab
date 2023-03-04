@@ -127,6 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingSpeed: 10
   bomb: {fileID: 4650082197484014613, guid: 18f1d34a84877474382d33beb454ef40, type: 3}
+  startPosition: {x: 30, y: 20, z: 5}
+  startRotation: {x: 0, y: -90, z: 0}
 --- !u!114 &4733542838347943803
 MonoBehaviour:
   m_ObjectHideFlags: 0

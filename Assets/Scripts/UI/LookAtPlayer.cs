@@ -8,7 +8,7 @@ public class LookAtPlayer : MonoBehaviour
 
     private void Start()
     {
-        cam = GameObject.Find("Main Camera").transform;
+        cam = GameObject.Find("Third Person Camera").transform;
     }
 
     private void Update()

@@ -30,11 +30,11 @@ public class GameIntroduction : MonoBehaviour
         oriSpeedFactor = 5f;
     }
 
-    public void Init(string from)
+    public void Init(string triggerMenu)
     {
         index = 0;
         currIntroduction = introductions[0];
-        if(from == "start")
+        if(triggerMenu == "start")
         {
             startText.text = "遊戲開始";
         }
@@ -135,6 +135,7 @@ public class GameIntroduction : MonoBehaviour
             AudioManager.singleton.SetGaming();
             gameObject.SetActive(false);
             GameManager.singleton.gameStarted = true;
+            Time.timeScale = 1f;
         }
         else
         {
