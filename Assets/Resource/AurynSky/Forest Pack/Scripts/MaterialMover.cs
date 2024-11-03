@@ -13,14 +13,14 @@ public class MaterialMover : MonoBehaviour
     }
     void Update()
     {
-        if (GameManager.singleton.poisonous)
-        {
-            rend.material.color = GameManager.singleton.virus.color;
-        }
-        else
-        {
-            rend.material.color = Color.white;
-        }
+        // if (GameManager.singleton.poisonous)
+        // {
+        //     rend.material.color = GameManager.singleton.virus.color;
+        // }
+        // else
+        // {
+        rend.material.color = Color.white;
+        // }
         float offset = Time.time * scrollSpeed;
         rend.material.SetTextureOffset("_MainTex", new Vector2(0, offset));
     }

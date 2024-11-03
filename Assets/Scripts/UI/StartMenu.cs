@@ -1,41 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
-    public GameObject playerUI;
-    public Player player;
-    public PlayerLocomotion locomotion;
-    public GameObject intro;
-    public GameObject volumeMenu;
+    [SerializeField]
+    private Button volumeButton;
 
-    private float oriSpeedFactor;
+    [SerializeField]
+    private Button quitButton;
 
-    private void Start()
+    private void Awake()
     {
-        playerUI.SetActive(false);
-        oriSpeedFactor = locomotion.movingSpeedFactor;
-        locomotion.movingSpeedFactor = 0f;
+        volumeButton.onClick.AddListener(OpenVolumeSetting);
+        quitButton.onClick.AddListener(QuitGame);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
     public void StartGame()
     {
-        intro.SetActive(true);
-        intro.GetComponent<GameIntroduction>().Init("Start");
-        gameObject.SetActive(false);
+        // intro.SetActive(true);
+        // intro.GetComponent<GameIntroduction>().Init("Start");
+        // gameObject.SetActive(false);
     }
 
-    public void VolumeSetting()
+    public void OpenVolumeSetting()
     {
-        volumeMenu.SetActive(true);
-        gameObject.SetActive(false);
+        EventManager.Invoke(EventType.UI.OpenVolumeSetting);
     }
 
-    public void QuitGame()
+    private void QuitGame()
     {
         Application.Quit();
+        EditorApplication.isPlaying = false;
     }
 }

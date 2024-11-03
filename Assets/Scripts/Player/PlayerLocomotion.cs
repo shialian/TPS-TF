@@ -132,9 +132,9 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (onGround)
         {
-            Vector3 velocity = rb.velocity;
+            Vector3 velocity = rb.linearVelocity;
             velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-            rb.velocity = velocity;
+            rb.linearVelocity = velocity;
         }
     }
 

@@ -18,7 +18,7 @@ public class Bomb : MonoBehaviour
     {
         if (firstActiveEnemy != null)
         {
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             transform.LookAt(firstActiveEnemy.position);
             transform.Rotate(90f, 0f, 0f);
